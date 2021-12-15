@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RegexBuilderService} from "../regex-builder.service";
 
 @Component({
   selector: 'app-regex-output',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegexOutputComponent implements OnInit {
 
-  constructor() { }
+  constructor(public readonly regexBuilderService: RegexBuilderService) {
+  }
 
   ngOnInit(): void {
   }
-
 }

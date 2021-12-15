@@ -5,10 +5,18 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@lightIntervals: range(2, 20, 1);
+@lightIntervals: range(1, 20, 1);
 
 each(@lightIntervals, {
   .light-@{value} {
     background-color: rgba(255, 255, 255, (@value / 100));
   }
 });
+
+.black-border {
+    border: solid rgba(0, 0, 0, 0.5) 1px;
+}
+
+.text-bolder {
+    font-weight: 500!important;
+}
