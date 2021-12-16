@@ -15,6 +15,7 @@ import {RegexTokenGraphicsComponent} from './regex-token-graphics/regex-token-gr
 import {AvailableTokensComponent} from './available-tokens/available-tokens.component';
 import {RegexTokenComponent} from './regex-token/regex-token.component';
 import {BasicModule} from "./basic/basic.module";
+import { RegexTokenDisposalComponent } from './regex-token-disposal/regex-token-disposal.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import {BasicModule} from "./basic/basic.module";
         RegexTokenGraphicsComponent,
         AvailableTokensComponent,
         RegexTokenComponent,
+        RegexTokenDisposalComponent,
     ],
     imports: [
         BrowserModule,

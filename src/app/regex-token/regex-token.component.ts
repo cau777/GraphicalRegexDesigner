@@ -37,7 +37,8 @@ export class RegexTokenComponent {
     public onStartDraggingChild(e: Event, i: number) {
         e.preventDefault();
         this.dragService.startDragging(this.token.children[i], () => {
-            this.token.children.splice(i, 0, this.dragService.currentlyDragging!);
+            if (this.dragService.currentlyDragging)
+                this.token.children.splice(i, 0, this.dragService.currentlyDragging);
         });
         this.token.children.splice(i, 1);
     }

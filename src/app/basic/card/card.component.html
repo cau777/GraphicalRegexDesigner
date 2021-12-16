@@ -3,6 +3,7 @@
         <h2 class="mb-0 text-bolder">
             {{ title }}
         </h2>
+        <ng-content select="[header]"></ng-content>
     </div>
     <div class="card-body">
         <ng-content></ng-content>
