@@ -1,4 +1,14 @@
 <app-card [title]="'Builder'">
     <app-regex-token [token]="mainToken"></app-regex-token>
     <app-available-tokens></app-available-tokens>
+
+    <app-dragging-element *ngIf="dragService.currentlyDragging">
+        <app-regex-token [token]="dragService.currentlyDragging">
+            <div class="children" *ngIf="dragService.currentlyDragging.acceptsChildren">
+                <ng-container *ngFor="let child of dragService.currentlyDragging.children;">
+                    <app-regex-token [token]="child"></app-regex-token>
+                </ng-container>
+            </div>
+        </app-regex-token>
+    </app-dragging-element>
 </app-card>

@@ -2,7 +2,7 @@
     <app-token-graphics [token]="token">
         <div class="children" *ngIf="token.acceptsChildren">
             <ng-container *ngFor="let child of token.children; let i = index;">
-                <app-regex-token [token]="child" (startDragging)="onStartDraggingChild(i)"></app-regex-token>
+                <app-regex-token [token]="child" (startDragging)="onStartDraggingChild($event, i)"></app-regex-token>
             </ng-container>
         </div>
     </app-token-graphics>

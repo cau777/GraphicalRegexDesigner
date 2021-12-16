@@ -15,6 +15,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import { TokenGraphicsComponent } from './token-graphics/token-graphics.component';
 import { AvailableTokensComponent } from './available-tokens/available-tokens.component';
 import { RegexTokenComponent } from './regex-token/regex-token.component';
+import { DraggingElementComponent } from './dragging-element/dragging-element.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RegexTokenComponent } from './regex-token/regex-token.component';
     TokenGraphicsComponent,
     AvailableTokensComponent,
     RegexTokenComponent,
+    DraggingElementComponent,
   ],
     imports: [
         BrowserModule,
