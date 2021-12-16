@@ -2,7 +2,7 @@
     <app-regex-token [token]="mainToken"></app-regex-token>
     <app-available-tokens></app-available-tokens>
 
-    <app-dragging-element *ngIf="dragService.currentlyDragging">
+    <app-dragging-element *ngIf="dragService.currentlyDragging" [nestCount]="2">
         <app-regex-token [token]="dragService.currentlyDragging">
             <div class="children" *ngIf="dragService.currentlyDragging.acceptsChildren">
                 <app-regex-token *ngFor="let child of dragService.currentlyDragging.children;" [token]="child"></app-regex-token>
