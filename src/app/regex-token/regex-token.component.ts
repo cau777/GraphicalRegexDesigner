@@ -21,11 +21,22 @@ export class RegexTokenComponent {
         e.stopPropagation();
         this.startDragging.emit(e);
 
-        console.log("click")
+        console.log("down")
+    }
+
+    public onMouseUp(e: Event) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (this.dragService.currentlyDragging) {
+            this.token.children.push(this.dragService.currentlyDragging);
+            this.dragService.stopDragging();
+        }
     }
 
     public onStartDraggingChild(e: Event, i: number) {
         e.preventDefault();
-        this.dragService.currentlyDragging = this.token.children[i];
+        this.dragService.startDragging(this.token.children[i]);
+        this.token.children.splice(i, 1);
     }
 }

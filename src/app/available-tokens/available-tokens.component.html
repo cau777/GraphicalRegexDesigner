@@ -1,5 +1,7 @@
-<div class="tokens" >
+<div class="tokens">
     <ng-container *ngFor="let token of getTokens(); let i = index">
-        <app-token-graphics [token]="token"></app-token-graphics>
+        <span (mousedown)="dragService.startDragging(token.clone())">
+            <app-token-graphics [token]="token"></app-token-graphics>
+        </span>
     </ng-container>
 </div>

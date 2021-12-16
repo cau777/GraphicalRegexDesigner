@@ -11,7 +11,7 @@ export class DraggingElementComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        document.body.appendChild(this.el.nativeElement);
+        document.body.children[0].children[0].appendChild(this.el.nativeElement);
     }
 
     public ngOnDestroy(): void {

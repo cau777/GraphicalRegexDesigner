@@ -6,4 +6,8 @@ export class RegexToken {
         public acceptsChildren: boolean,
         public children: RegexToken[] = [],) {
     }
+
+    public clone(): RegexToken {
+        return new RegexToken(this.name, this.color, this.borderColor, this.acceptsChildren, []);
+    }
 }

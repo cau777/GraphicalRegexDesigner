@@ -6,10 +6,14 @@ import {RegexToken} from "./models/RegexToken";
 })
 export class DragService {
     public currentlyDragging?: RegexToken;
-    public draggingFromSource = false;
 
-    public startDragging(token: RegexToken, source: boolean) {
+    public startDragging(token: RegexToken) {
+        console.log("start dragging");
         this.currentlyDragging = token;
-        this.draggingFromSource = source;
+    }
+
+    public stopDragging() {
+        console.log("stop dragging");
+        this.currentlyDragging = undefined;
     }
 }

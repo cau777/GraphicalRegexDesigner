@@ -5,9 +5,7 @@
     <app-dragging-element *ngIf="dragService.currentlyDragging">
         <app-regex-token [token]="dragService.currentlyDragging">
             <div class="children" *ngIf="dragService.currentlyDragging.acceptsChildren">
-                <ng-container *ngFor="let child of dragService.currentlyDragging.children;">
-                    <app-regex-token [token]="child"></app-regex-token>
-                </ng-container>
+                <app-regex-token *ngFor="let child of dragService.currentlyDragging.children;" [token]="child"></app-regex-token>
             </div>
         </app-regex-token>
     </app-dragging-element>

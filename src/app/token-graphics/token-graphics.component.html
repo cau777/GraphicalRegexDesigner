@@ -2,7 +2,7 @@
     <div>
         {{ token.name }}
     </div>
-    <div class="inner" [ngStyle]="{'background-color': token.color}">
+    <div class="inner flex-fill" [ngStyle]="{'background-color': token.color}" (mouseup)="onMouseUpInner($event)">
         <ng-content></ng-content>
     </div>
 </div>

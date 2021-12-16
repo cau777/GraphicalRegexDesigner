@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {RegexToken} from "../models/RegexToken";
+import {DragService} from "../drag.service";
 
 @Component({
   selector: 'app-available-tokens',
@@ -9,6 +10,9 @@ import {RegexToken} from "../models/RegexToken";
 export class AvailableTokensComponent {
     @Input()
     public query?: string;
+
+    public constructor(public dragService: DragService) {
+    }
 
     private static readonly AllTokens = [
         new RegexToken("Main", "#006FED", "#005ac0", true),
