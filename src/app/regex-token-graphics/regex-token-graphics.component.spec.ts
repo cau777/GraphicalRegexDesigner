@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TokenGraphicsComponent } from './token-graphics.component';
+import { RegexTokenGraphicsComponent } from './regex-token-graphics.component';
 
 describe('TokenGraphicsComponent', () => {
-  let component: TokenGraphicsComponent;
-  let fixture: ComponentFixture<TokenGraphicsComponent>;
+  let component: RegexTokenGraphicsComponent;
+  let fixture: ComponentFixture<RegexTokenGraphicsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TokenGraphicsComponent ]
+      declarations: [ RegexTokenGraphicsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TokenGraphicsComponent);
+    fixture = TestBed.createComponent(RegexTokenGraphicsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

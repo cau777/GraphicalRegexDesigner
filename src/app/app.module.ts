@@ -11,7 +11,7 @@ import {RegexOutputComponent} from './regex-output/regex-output.component';
 import {HeaderComponent} from './header/header.component';
 import {RegexOptionsComponent} from './regex-options/regex-options.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {TokenGraphicsComponent} from './token-graphics/token-graphics.component';
+import {RegexTokenGraphicsComponent} from './regex-token-graphics/regex-token-graphics.component';
 import {AvailableTokensComponent} from './available-tokens/available-tokens.component';
 import {RegexTokenComponent} from './regex-token/regex-token.component';
 import {BasicModule} from "./basic/basic.module";
@@ -25,7 +25,7 @@ import {BasicModule} from "./basic/basic.module";
         RegexOutputComponent,
         HeaderComponent,
         RegexOptionsComponent,
-        TokenGraphicsComponent,
+        RegexTokenGraphicsComponent,
         AvailableTokensComponent,
         RegexTokenComponent,
     ],

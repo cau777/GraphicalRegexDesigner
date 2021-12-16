@@ -15,8 +15,17 @@ export class AvailableTokensComponent {
     }
 
     private static readonly AllTokens = [
-        new RegexToken("Main", "#006FED", "#005ac0", true),
+        new RegexToken("Any char", "#006FED", "#005ac0", false),
         new RegexToken("Literal", "#006FED", "#005ac0", false),
+
+        new RegexToken("Optional", "#006FED", "#005ac0", true),
+        new RegexToken("0+ times", "#006FED", "#005ac0", true),
+        new RegexToken("1+ times", "#006FED", "#005ac0", true),
+        new RegexToken("More than {} times", "#006FED", "#005ac0", true),
+        new RegexToken("Less than {} times", "#006FED", "#005ac0", true),
+        new RegexToken("Between {} and {} times", "#006FED", "#005ac0", true),
+        new RegexToken("Alternatives", "#006FED", "#005ac0", true),
+        new RegexToken("Group", "#006FED", "#005ac0", true),
     ]
 
     public getTokens() {

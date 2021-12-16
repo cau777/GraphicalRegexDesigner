@@ -1,5 +1,8 @@
 <app-card [title]="'Builder'">
     <app-regex-token [token]="mainToken"></app-regex-token>
+
+    <hr/>
+
     <app-available-tokens></app-available-tokens>
 
     <app-dragging-element *ngIf="dragService.currentlyDragging" [nestCount]="2">
