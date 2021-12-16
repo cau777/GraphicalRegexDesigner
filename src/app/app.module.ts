@@ -16,6 +16,8 @@ import {AvailableTokensComponent} from './available-tokens/available-tokens.comp
 import {RegexTokenComponent} from './regex-token/regex-token.component';
 import {BasicModule} from "./basic/basic.module";
 import { RegexTokenDisposalComponent } from './regex-token-disposal/regex-token-disposal.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
     declarations: [
@@ -37,6 +39,8 @@ import { RegexTokenDisposalComponent } from './regex-token-disposal/regex-token-
         BrowserAnimationsModule,
         MatCheckboxModule,
         BasicModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     providers: [],
     bootstrap: [AppComponent]

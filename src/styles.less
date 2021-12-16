@@ -5,9 +5,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@lightIntervals: range(1, 20, 1);
+@primary: #9c27b0;
+@primaryLighter: lighten(@primary, 20%);
 
-each(@lightIntervals, {
+each(range(1, 20, 1), {
   .light-@{value} {
     background-color: rgba(255, 255, 255, (@value / 100));
   }
@@ -19,4 +20,17 @@ each(@lightIntervals, {
 
 .text-bolder {
     font-weight: 500!important;
+}
+
+input.simple-input {
+    .black-border();
+    background-color: rgba(0, 0, 0, 0.15);
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+}
+
+input.simple-input:focus {
+    outline: none!important;
+    border-color: @primaryLighter;
 }
