@@ -1,0 +1,8 @@
+<div class="token" [ngStyle]="{'background-color': token.borderColor}">
+    <div>
+        {{ token.name }}
+    </div>
+    <div class="inner" [ngStyle]="{'background-color': token.color}">
+        <ng-content></ng-content>
+    </div>
+</div>

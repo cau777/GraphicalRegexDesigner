@@ -12,6 +12,9 @@ import { HeaderComponent } from './header/header.component';
 import { CardComponent } from './card/card.component';
 import { RegexOptionsComponent } from './regex-options/regex-options.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { TokenGraphicsComponent } from './token-graphics/token-graphics.component';
+import { AvailableTokensComponent } from './available-tokens/available-tokens.component';
+import { RegexTokenComponent } from './regex-token/regex-token.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     HeaderComponent,
     CardComponent,
     RegexOptionsComponent,
+    TokenGraphicsComponent,
+    AvailableTokensComponent,
+    RegexTokenComponent,
   ],
     imports: [
         BrowserModule,
