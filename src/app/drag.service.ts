@@ -8,15 +8,14 @@ export class DragService {
     public currentlyDragging?: RegexToken;
     private stoppedDraggingCallback?: () => void;
 
-    public startDragging(token: RegexToken, stoppedDraggingCallback?: () => void) {
-        console.log("start dragging");
-        this.stoppedDraggingCallback = stoppedDraggingCallback;
+    public startDragging(token: RegexToken, invalidCallback?: () => void) {
+        this.stoppedDraggingCallback = invalidCallback;
         this.currentlyDragging = token;
     }
 
-    public stopDragging() {
-        console.log("stop dragging");
-        this.stoppedDraggingCallback?.();
+    public stopDragging(wasInvalid: boolean = false) {
+        if (wasInvalid)
+            this.stoppedDraggingCallback?.();
         this.stoppedDraggingCallback = undefined;
         this.currentlyDragging = undefined;
     }

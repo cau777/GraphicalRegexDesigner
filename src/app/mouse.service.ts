@@ -13,6 +13,6 @@ export class MouseService {
             this.mouseX = e.clientX;
             this.mouseY = e.clientY;
         });
-        document.addEventListener("mouseup", () => this.dragService.stopDragging());
+        document.addEventListener("mouseup", () => this.dragService.stopDragging(true));
     }
 }

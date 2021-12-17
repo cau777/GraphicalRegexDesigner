@@ -10,6 +10,7 @@ import {DragService} from "../drag.service";
 export class RegexBuilderComponent {
     public constructor(public dragService: DragService) {
     }
+    //"#8a8200",
 
-    public mainToken = new RegexToken("Regex", "#c4ba00", "#8a8200", true, []);
+    public mainToken = new RegexToken("Regex", "#8a8200",  true, []);
 }

@@ -16,4 +16,11 @@ export class RegexTokenGraphicsComponent {
     public onMouseUpInner(e: Event) {
         this.mouseUpInner.emit(e);
     }
+
+    public getInnerStyle() {
+        if (this.token.acceptsChildren) {
+            return {"background-color": this.token.centerColor};
+        }
+        return {};
+    }
 }

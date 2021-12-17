@@ -14,7 +14,6 @@ export class RegexTokenDisposalComponent {
         e.stopPropagation();
         e.preventDefault();
 
-        this.dragService.currentlyDragging = undefined;
         this.dragService.stopDragging();
     }
 }

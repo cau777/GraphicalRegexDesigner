@@ -18,6 +18,8 @@ import {BasicModule} from "./basic/basic.module";
 import { RegexTokenDisposalComponent } from './regex-token-disposal/regex-token-disposal.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { TokenHeaderForDirective } from './token-header-for.directive';
+import { TokenHeaderInputComponent } from './token-header-input/token-header-input.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +34,8 @@ import {MatInputModule} from "@angular/material/input";
         AvailableTokensComponent,
         RegexTokenComponent,
         RegexTokenDisposalComponent,
+        TokenHeaderForDirective,
+        TokenHeaderInputComponent,
     ],
     imports: [
         BrowserModule,
