@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
-import {RegexToken} from "../models/RegexToken";
 import {DragService} from "../drag.service";
+import {AnyCharacterToken} from "../models/tokens/AnyCharacterToken";
+import {LiteralToken} from "../models/tokens/LiteralToken";
+import {OptionalToken} from "../models/tokens/OptionalToken";
+import {Plus0Times} from "../models/tokens/Plus0Times";
+import {Plus1Times} from "../models/tokens/Plus1Times";
 
 @Component({
   selector: 'app-available-tokens',
@@ -14,18 +18,17 @@ export class AvailableTokensComponent {
     }
 
     private static readonly AllTokens = [
-        new RegexToken("Any char", "#4f84ec", false),
-        new RegexToken("Literal", "#56a75c", false),
-
-        new RegexToken("Optional", "#d24b3c", true),
-        new RegexToken("0+ times", "#a383da", true),
-        new RegexToken("1+ times", "#e363b4", true),
-        new RegexToken("More than {} times", "#ea8545", true),
-        new RegexToken("Less than {} times", "#24c6cc", true),
-        new RegexToken("Between {} and {} times", "#85ed68", true),
-        new RegexToken("Alternatives", "#006FED", true),
-        new RegexToken("All chars but", "#006FED", true),
-        new RegexToken("Group", "#006FED", true),
+        new AnyCharacterToken(),
+        new LiteralToken(),
+        new OptionalToken(),
+        new Plus0Times(),
+        new Plus1Times(),
+        // new RegexToken("More than {} times", "#ea8545", true),
+        // new RegexToken("Less than {} times", "#24c6cc", true),
+        // new RegexToken("Between {} and {} times", "#85ed68", true),
+        // new RegexToken("Alternatives", "#006FED", true),
+        // new RegexToken("All chars but", "#006FED", true),
+        // new RegexToken("Group", "#006FED", true),
     ]
 
     public getTokens() {

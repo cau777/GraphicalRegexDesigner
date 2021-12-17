@@ -1,5 +1,6 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {RegexToken} from "../models/RegexToken";
+import {RegexBuilderService} from "../regex-builder.service";
 
 @Component({
     selector: 'app-token-header-input',
@@ -13,7 +14,7 @@ export class TokenHeaderInputComponent implements OnInit {
     @Input()
     public index!: number;
 
-    public constructor(private element: ElementRef) {
+    public constructor(private element: ElementRef, private regexBuilder: RegexBuilderService) {
     }
 
     public ngOnInit(): void {
@@ -24,5 +25,6 @@ export class TokenHeaderInputComponent implements OnInit {
     public onInput(e: Event) {
         this.token.values[this.index] = (e.target as HTMLSpanElement).innerText;
         console.log(this.token.values[this.index])
+        this.regexBuilder.generateRegex();
     }
 }

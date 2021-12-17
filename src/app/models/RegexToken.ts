@@ -1,10 +1,10 @@
-export class RegexToken {
+export abstract class RegexToken {
     private static readonly light = 60;
     public readonly centerColor: string;
     public readonly header: (string | "input")[];
     public values: string[];
 
-    public constructor(
+    protected constructor(
         public readonly name: string,
         public readonly borderColor: string,
         public readonly acceptsChildren: boolean,
@@ -22,19 +22,25 @@ export class RegexToken {
             this.header.push(name.substring(start, index));
             this.header.push("input");
             start = index + 2;
-            index =  name.indexOf("{}", start);
+            index = name.indexOf("{}", start);
         }
 
         let rest = name.substring(start);
-        if(rest) this.header.push(rest);
-
-        console.log("For " + name + ":" + JSON.stringify(this.header));
+        if (rest) this.header.push(rest);
     }
 
+    public abstract compile(): string;
+
+    protected abstract createInstance(): RegexToken;
+
     public clone(): RegexToken {
-        const regexToken = new RegexToken(this.name, this.borderColor, this.acceptsChildren, []);
-        regexToken.values = [...this.values];
-        return regexToken;
+        const target = this.createInstance();
+        target.values = [...this.values];
+        return target;
+    }
+
+    protected compileAndConcatChildren() {
+        return this.children.map(o => o.compile()).reduce((s1, s2) => s1 + s2);
     }
 
     private static lightenColor(hex: string) {
