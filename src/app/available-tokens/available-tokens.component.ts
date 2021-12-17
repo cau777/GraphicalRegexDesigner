@@ -29,6 +29,7 @@ export class AvailableTokensComponent {
         // new RegexToken("Alternatives", "#006FED", true),
         // new RegexToken("All chars but", "#006FED", true),
         // new RegexToken("Group", "#006FED", true),
+        // New line
     ]
 
     public getTokens() {

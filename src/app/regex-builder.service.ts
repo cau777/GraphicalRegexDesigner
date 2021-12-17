@@ -17,7 +17,6 @@ export class RegexBuilderService {
     }
 
     public generateRegex() {
-        console.log("generating")
         try {
             let regex = "";
 
@@ -28,6 +27,7 @@ export class RegexBuilderService {
             if (this._assertEnd) regex += "$";
 
             this.regex = regex;
+            this.error = undefined;
         } catch (e) {
             this.error = e as string;
             console.log(this.error)

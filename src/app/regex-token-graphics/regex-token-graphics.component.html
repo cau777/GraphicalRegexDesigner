@@ -1,21 +1,15 @@
 <div class="token" [ngStyle]="{'background-color': token.borderColor}">
     <header>
-<!--        <ng-container *ngFor="let headerPart of token.header; let i = index;">-->
-<!--            <span *ngIf="headerPart === 'input'" class="input" contenteditable="true"-->
-<!--                  (input)="onInput($event, i)" (mousedown)="$event.stopPropagation()"></span>-->
-
-<!--            <span *ngIf="headerPart !== 'input'">{{headerPart}}</span>-->
-<!--        </ng-container>-->
         <ng-container *appTokenHeaderFor="token; let isInput = isInput; let inputIndex = inputIndex; let text = text">
-            <app-token-header-input *ngIf="isInput" [token]="token" [index]="inputIndex">
-
-            </app-token-header-input>
-            <span *ngIf="!isInput">
-                {{text}}
-            </span>
+            <ng-container [ngSwitch]="text">
+                <app-token-header-input *ngSwitchCase="'input'" [token]="token"
+                                        [index]="inputIndex"></app-token-header-input>
+                <div *ngSwitchCase="'newline'" class="flex-break"></div>
+                <span *ngSwitchDefault [innerHTML]="text"></span>
+            </ng-container>
         </ng-container>
     </header>
-    <div class="inner flex-fill" [ngStyle]="getInnerStyle()" (mouseup)="onMouseUpInner($event)">
+    <div class="inner flex-fill" [ngStyle]="getInnerStyle()" (mouseup)="onMouseUpInner($event)" *ngIf="token.acceptsChildren">
         <ng-content></ng-content>
     </div>
 </div>

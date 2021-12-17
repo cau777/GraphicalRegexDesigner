@@ -2,7 +2,7 @@ import {RegexToken} from "../RegexToken";
 
 export class LiteralToken extends RegexToken {
     public constructor() {
-        super("Literal {}", "#56a75c", false);
+        super("Literal \n {}", "#56a75c", false);
     }
 
     public compile(): string {

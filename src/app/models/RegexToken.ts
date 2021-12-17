@@ -19,14 +19,15 @@ export abstract class RegexToken {
 
         while (index !== -1) {
             this.values.push("");
-            this.header.push(name.substring(start, index));
+            let text = name.substring(start, index)
+            this.header.push(...RegexToken.separateNewLines(text));
             this.header.push("input");
             start = index + 2;
             index = name.indexOf("{}", start);
         }
 
         let rest = name.substring(start);
-        if (rest) this.header.push(rest);
+        if (rest) this.header.push(...RegexToken.separateNewLines(rest));
     }
 
     public abstract compile(): string;
@@ -40,6 +41,7 @@ export abstract class RegexToken {
     }
 
     protected compileAndConcatChildren() {
+        if (this.children.length === 0) return "";
         return this.children.map(o => o.compile()).reduce((s1, s2) => s1 + s2);
     }
 
@@ -61,5 +63,18 @@ export abstract class RegexToken {
         if (sb.length === 1) sb = "0" + sb;
 
         return "#" + sr + sg + sb;
+    }
+
+    private static separateNewLines(text: string): string[] {
+        let parts = text.split("\n");
+        let results = [];
+
+        for (let i = 0; i < parts.length; i++) {
+            results.push(parts[i]);
+            if (i !== parts.length - 1)
+                results.push("newline");
+        }
+
+        return results;
     }
 }

@@ -21,8 +21,6 @@ export class RegexTokenComponent {
     public onMouseDown(e: Event) {
         e.stopPropagation();
         this.startDragging.emit(e);
-
-        console.log("down")
     }
 
     public onMouseUp(e: Event) {

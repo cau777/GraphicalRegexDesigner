@@ -1,6 +1,6 @@
 <div class="h-100" (mousedown)="onMouseDown($event)">
     <app-regex-token-graphics [token]="token" (mouseUpInner)="onMouseUp($event)">
-        <div class="children" *ngIf="token.acceptsChildren">
+        <div class="children">
             <ng-container *ngFor="let child of token.children; let i = index;">
                 <app-regex-token [token]="child"
                                  (startDragging)="onStartDraggingChild($event, i)"></app-regex-token>
