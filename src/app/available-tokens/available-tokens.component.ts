@@ -44,6 +44,8 @@ export class AvailableTokensComponent {
     }
 
     public onInputQuery(e: Event){
-        this.query = (e.target as HTMLInputElement).value;
+        let element = e.target as HTMLInputElement;
+        this.query = element.value;
+        console.log(element.scrollWidth);
     }
 }
