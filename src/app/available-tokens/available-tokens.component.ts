@@ -5,6 +5,9 @@ import {LiteralToken} from "../models/tokens/LiteralToken";
 import {OptionalToken} from "../models/tokens/OptionalToken";
 import {Plus0Times} from "../models/tokens/Plus0Times";
 import {Plus1Times} from "../models/tokens/Plus1Times";
+import {NewLineToken} from "../models/tokens/NewLineToken";
+import {MoreThanToken} from "../models/tokens/MoreThanToken";
+import {LessThanToken} from "../models/tokens/LessThanToken";
 
 @Component({
   selector: 'app-available-tokens',
@@ -23,13 +26,14 @@ export class AvailableTokensComponent {
         new OptionalToken(),
         new Plus0Times(),
         new Plus1Times(),
-        // new RegexToken("More than {} times", "#ea8545", true),
-        // new RegexToken("Less than {} times", "#24c6cc", true),
+        // Exactly {} times
+        new MoreThanToken(),
+        new LessThanToken(),
         // new RegexToken("Between {} and {} times", "#85ed68", true),
         // new RegexToken("Alternatives", "#006FED", true),
         // new RegexToken("All chars but", "#006FED", true),
         // new RegexToken("Group", "#006FED", true),
-        // New line
+        new NewLineToken(),
     ]
 
     public getTokens() {

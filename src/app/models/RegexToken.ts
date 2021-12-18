@@ -1,3 +1,5 @@
+import {RegexBuilderService} from "../regex-builder.service";
+
 export abstract class RegexToken {
     private static readonly light = 60;
     public readonly centerColor: string;
@@ -30,7 +32,7 @@ export abstract class RegexToken {
         if (rest) this.header.push(...RegexToken.separateNewLines(rest));
     }
 
-    public abstract compile(): string;
+    public abstract compile(builder: RegexBuilderService): string;
 
     protected abstract createInstance(): RegexToken;
 
@@ -40,9 +42,9 @@ export abstract class RegexToken {
         return target;
     }
 
-    protected compileAndConcatChildren() {
+    protected compileAndConcatChildren(builder: RegexBuilderService) {
         if (this.children.length === 0) return "";
-        return this.children.map(o => o.compile()).reduce((s1, s2) => s1 + s2);
+        return this.children.map(o => o.compile(builder)).reduce((s1, s2) => s1 + s2);
     }
 
     private static lightenColor(hex: string) {

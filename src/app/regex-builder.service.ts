@@ -22,7 +22,7 @@ export class RegexBuilderService {
 
             if (this._assertStart) regex += "^";
 
-            regex += this.mainRegexToken.compile();
+            regex += this.mainRegexToken.compile(this);
 
             if (this._assertEnd) regex += "$";
 
