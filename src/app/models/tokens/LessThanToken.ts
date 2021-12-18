@@ -8,7 +8,7 @@ export class LessThanToken extends PrevCharModifierToken {
 
     protected get token() {
         let max = parseInt(this.values[0]);
-        if (isNaN(max)) throw "Invalid maximum value at " + this.name;
+        if (isNaN(max)) throw this.invalidMax();
         return "{," + max + "}";
     }
 

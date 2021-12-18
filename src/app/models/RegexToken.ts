@@ -6,6 +6,13 @@ export abstract class RegexToken {
     public readonly header: (string | "input")[];
     public values: string[];
 
+    // Exception constants
+    protected literalCantBeEmpty = () => "Literal can't be empty";
+    protected mustHaveChildren = () => this.name + " must have children";
+    protected atLeast2Children = () => this.name + " must at least two children";
+    protected invalidMin = () => "Invalid minimum value at " + this.name;
+    protected invalidMax = () => "Invalid maximum value at " + this.name;
+
     protected constructor(
         public readonly name: string,
         public readonly borderColor: string,

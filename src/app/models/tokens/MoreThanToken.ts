@@ -8,7 +8,7 @@ export class MoreThanToken extends PrevCharModifierToken {
 
     protected get token() {
         let min = parseInt(this.values[0]);
-        if (isNaN(min)) throw "Invalid minimum value at " + this.name;
+        if (isNaN(min)) throw this.invalidMin();
         return "{" + min + ",}";
     }
 

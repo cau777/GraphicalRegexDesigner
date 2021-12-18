@@ -8,6 +8,9 @@ import {Plus1Times} from "../models/tokens/Plus1Times";
 import {NewLineToken} from "../models/tokens/NewLineToken";
 import {MoreThanToken} from "../models/tokens/MoreThanToken";
 import {LessThanToken} from "../models/tokens/LessThanToken";
+import {BetweenTimesToken} from "../models/tokens/BetweenTimesToken";
+import {AlternativesToken} from "../models/tokens/AlternativesToken";
+import {GroupToken} from "../models/tokens/GroupToken";
 
 @Component({
   selector: 'app-available-tokens',
@@ -29,10 +32,10 @@ export class AvailableTokensComponent {
         // Exactly {} times
         new MoreThanToken(),
         new LessThanToken(),
-        // new RegexToken("Between {} and {} times", "#85ed68", true),
-        // new RegexToken("Alternatives", "#006FED", true),
-        // new RegexToken("All chars but", "#006FED", true),
-        // new RegexToken("Group", "#006FED", true),
+        new BetweenTimesToken(),
+        new AlternativesToken(),
+        // new RegexToken("All chars but", "#f285bc", true),
+        new GroupToken(),
         new NewLineToken(),
     ]
 

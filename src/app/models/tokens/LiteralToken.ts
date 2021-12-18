@@ -1,4 +1,5 @@
 import {RegexToken} from "../RegexToken";
+import {escapeRegexp} from "ngx-bootstrap/typeahead";
 
 export class LiteralToken extends RegexToken {
     public constructor() {
@@ -6,8 +7,8 @@ export class LiteralToken extends RegexToken {
     }
 
     public compile(): string {
-        if (!this.values[0]) throw "Literal can't be empty";
-        return this.values[0].replace("\\", "\\\\");
+        if (!this.values[0]) throw this.literalCantBeEmpty();
+        return escapeRegexp(this.values[0]);
     }
 
     protected createInstance(): RegexToken {
