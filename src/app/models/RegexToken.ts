@@ -7,7 +7,7 @@ export abstract class RegexToken {
     public values: string[];
 
     // Exception constants
-    protected literalCantBeEmpty = () => "Literal can't be empty";
+    protected cantBeEmpty = () => this.name + " can't be empty";
     protected mustHaveChildren = () => this.name + " must have children";
     protected atLeast2Children = () => this.name + " must at least two children";
     protected invalidMin = () => "Invalid minimum value at " + this.name;

@@ -3,11 +3,11 @@ import {escapeRegexp} from "ngx-bootstrap/typeahead";
 
 export class LiteralToken extends RegexToken {
     public constructor() {
-        super("Literal \n {}", "#56a75c", false);
+        super("Literal \n{}", "#56a75c", false);
     }
 
     public compile(): string {
-        if (!this.values[0]) throw this.literalCantBeEmpty();
+        if (!this.values[0]) throw this.cantBeEmpty();
         return escapeRegexp(this.values[0]);
     }
 

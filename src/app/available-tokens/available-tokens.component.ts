@@ -18,6 +18,7 @@ import {RegexToken} from "../models/RegexToken";
 import {VariableReferenceToken} from "../models/tokens/VariableReferenceToken";
 import {TermsAlternativesToken} from "../models/tokens/TermsAlternativesToken";
 import {NegativeCharAlternativesToken} from "../models/tokens/NegativeCharAlternativesToken";
+import {RegexFragmentToken} from "../models/tokens/RegexFragmentToken";
 
 @Component({
   selector: 'app-available-tokens',
@@ -42,6 +43,7 @@ export class AvailableTokensComponent {
             new CharAlternativesToken(),
             new TermsAlternativesToken(),
             new NegativeCharAlternativesToken(),
+            new RegexFragmentToken(),
             new GroupToken(),
             new NewLineToken(),
             new TabToken(),
