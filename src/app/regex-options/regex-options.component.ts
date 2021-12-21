@@ -7,7 +7,6 @@ import {RegexBuilderService} from "../regex-builder.service";
     styleUrls: ['./regex-options.component.less']
 })
 export class RegexOptionsComponent {
-    // TODO: add \\ escaping
     public constructor(public readonly regexBuilderService: RegexBuilderService) {
     }
 }

@@ -10,6 +10,8 @@ import {Upper, Lower, AllChars, Digits} from "./misc/string-constants";
 export class RegexBuilderService {
     private _assertStart = false;
     private _assertEnd = false;
+    private _escapeBackslash = false;
+
     public mainRegexToken: RegexToken;
     public variables: Map<string, MainToken>;
     public regex = "";
@@ -51,6 +53,15 @@ export class RegexBuilderService {
     public set assertEnd(value: boolean) {
         this._assertEnd = value;
         this.generateRegex();
+    }
+
+    public set escapeBackslash(value: boolean) {
+        this._escapeBackslash = value;
+        this.generateRegex();
+    }
+
+    public get escapeBackslash(): boolean {
+        return this._escapeBackslash;
     }
 
     private createLiteralsVariable(name: string, literals: string) {
