@@ -12,6 +12,8 @@ export abstract class RegexToken {
     protected atLeast2Children = () => this.name + " must at least two children";
     protected invalidMin = () => "Invalid minimum value at " + this.name;
     protected invalidMax = () => "Invalid maximum value at " + this.name;
+    protected invalidVal = () => "Invalid value at " + this.name;
+    protected childrenOneLen = () => "Children of " + this.name + " must be ranges or single literals";
 
     protected constructor(
         public readonly name: string,

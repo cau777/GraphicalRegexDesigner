@@ -1,28 +1,52 @@
 import {RegexToken} from "../RegexToken";
 import {RegexBuilderService} from "../../regex-builder.service";
+import {AllChars, Digits} from "../../misc/string-constants";
 
-export class AlternativesToken extends RegexToken {
-    public constructor() {
-        super("One of", "#87cbff", true);
-    }
+export abstract class AlternativesToken extends RegexToken {
+    protected compileAndConcatUnique(builder: RegexBuilderService) {
+        let all = this.compileAndConcatChildren(builder);
+        let alreadyUsed = new Set();
+        let result = "";
 
-    public compile(builder: RegexBuilderService): string {
-        if (this.children.length === 0)
-            throw this.mustHaveChildren();
-
-        if (this.children.length === 1)
-            throw this.atLeast2Children();
-
-        let compiled = this.children.map(o => o.compile(builder));
-
-        if (compiled.filter(o => o.length === 1).length === compiled.length) { // If all parts have exactly 1 character
-            return "[" + compiled.join() + "]";
+        for (let char of all) {
+            if (alreadyUsed.has(char)) continue;
+            alreadyUsed.add(char);
+            result += char;
         }
 
-        return "(" + compiled.map(o => o.indexOf("|") !== -1 ? "(" + o + ")" : o).join("|") + ")";
+        return result;
     }
 
-    protected createInstance(): RegexToken {
-        return new AlternativesToken();
+    protected simplify(s: string) {
+        let replaced = s.replace(AllChars, "\\w").replace(Digits, "\\d");
+        let replacedLen = replaced.length;
+        let result = "";
+
+        let i = 0;
+        while (i < replacedLen) {
+            let start = replaced.charAt(i);
+            let end = start;
+
+            let startCode = replaced.charCodeAt(i);
+            let sequenceLen = 0;
+
+            while (sequenceLen + i < replacedLen) {
+                let pos = sequenceLen + i;
+                if (replaced.charCodeAt(pos) - sequenceLen !== startCode) break;
+                end = replaced.charAt(pos);
+                sequenceLen++;
+            }
+
+            if (sequenceLen === 1)
+                result += start;
+            else if (sequenceLen === 2)
+                result += start + "" + end;
+            else
+                result += start + "-" + end;
+
+            i += sequenceLen;
+        }
+
+        return result;
     }
 }
