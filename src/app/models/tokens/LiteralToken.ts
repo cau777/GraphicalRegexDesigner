@@ -9,9 +9,7 @@ export class LiteralToken extends RegexToken {
 
     public compile(builder: RegexBuilderService): string {
         if (!this.values[0]) throw this.cantBeEmpty();
-        let result = escapeRegexp(this.values[0]);
-        if (builder.escapeBackslash) result = result.replace(/\\/g, "\\\\");
-        return result;
+        return escapeRegexp(this.values[0]);
     }
 
     protected createInstance(): RegexToken {

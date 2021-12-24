@@ -16,4 +16,18 @@ export class MainToken extends RegexToken {
     protected createInstance(): RegexToken {
         return new MainToken(this.name, this.isPredefined);
     }
+
+    public get allChildren() {
+        let result: RegexToken[] = [];
+        this.allChildrenRecursive(this, result);
+        return result;
+    }
+
+    private allChildrenRecursive(current: RegexToken, list: RegexToken[]) {
+        list.push(...current.children)
+
+        for (let child of current.children) {
+            this.allChildrenRecursive(child, list);
+        }
+    }
 }

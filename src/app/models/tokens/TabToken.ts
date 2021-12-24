@@ -6,7 +6,7 @@ export class TabToken extends RegexToken {
     }
 
     public compile(): string {
-        return "\\t";
+        return "\t";
     }
 
     protected createInstance(): RegexToken {

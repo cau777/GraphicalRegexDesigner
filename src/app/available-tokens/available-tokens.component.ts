@@ -21,41 +21,42 @@ import {NegativeCharAlternativesToken} from "../models/tokens/NegativeCharAltern
 import {RegexFragmentToken} from "../models/tokens/RegexFragmentToken";
 
 @Component({
-  selector: 'app-available-tokens',
-  templateUrl: './available-tokens.component.html',
-  styleUrls: ['./available-tokens.component.less']
+    selector: 'app-available-tokens',
+    templateUrl: './available-tokens.component.html',
+    styleUrls: ['./available-tokens.component.less']
 })
 export class AvailableTokensComponent {
-    private readonly allTokens: RegexToken[];
-    private query= "";
+    private static readonly defaultTokens: RegexToken[] = [
+        new AnyCharacterToken(),
+        new LiteralToken(),
+        new OptionalToken(),
+        new Plus0Times(),
+        new Plus1Times(),
+        new ExactTimesToken(),
+        new MoreThanToken(),
+        new LessThanToken(),
+        new BetweenTimesToken(),
+        new CharAlternativesToken(),
+        new TermsAlternativesToken(),
+        new NegativeCharAlternativesToken(),
+        new RegexFragmentToken(),
+        new GroupToken(),
+        new NewLineToken(),
+        new TabToken(),
+    ];
+
+    private query = "";
 
     public constructor(public dragService: DragService, private regexBuilder: RegexBuilderService) {
-        this.allTokens = [
-            new AnyCharacterToken(),
-            new LiteralToken(),
-            new OptionalToken(),
-            new Plus0Times(),
-            new Plus1Times(),
-            new ExactTimesToken(),
-            new MoreThanToken(),
-            new LessThanToken(),
-            new BetweenTimesToken(),
-            new CharAlternativesToken(),
-            new TermsAlternativesToken(),
-            new NegativeCharAlternativesToken(),
-            new RegexFragmentToken(),
-            new GroupToken(),
-            new NewLineToken(),
-            new TabToken(),
-        ];
-
-        for (let variable of regexBuilder.variables.values()) {
-            this.allTokens.push(new VariableReferenceToken(variable.name));
-        }
     }
 
     public getTokens() {
-        let tokens = this.allTokens;
+        let tokens = [...AvailableTokensComponent.defaultTokens];
+
+        for (let variable of this.regexBuilder.variables.values()) {
+            if (variable.name !== "Regex")
+                tokens.push(new VariableReferenceToken(variable.name));
+        }
 
         if (this.query) {
             let lowerQuery = this.query.toLowerCase();
@@ -65,7 +66,7 @@ export class AvailableTokensComponent {
         return tokens;
     }
 
-    public onInputQuery(e: Event){
+    public onInputQuery(e: Event) {
         let element = e.target as HTMLInputElement;
         this.query = element.value;
         console.log(element.scrollWidth);

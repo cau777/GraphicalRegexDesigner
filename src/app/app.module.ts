@@ -15,11 +15,16 @@ import {RegexTokenGraphicsComponent} from './regex-token-graphics/regex-token-gr
 import {AvailableTokensComponent} from './available-tokens/available-tokens.component';
 import {RegexTokenComponent} from './regex-token/regex-token.component';
 import {BasicModule} from "./basic/basic.module";
-import { RegexTokenDisposalComponent } from './regex-token-disposal/regex-token-disposal.component';
+import {RegexTokenDisposalComponent} from './regex-token-disposal/regex-token-disposal.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import { TokenHeaderForDirective } from './token-header-for.directive';
-import { TokenHeaderInputComponent } from './token-header-input/token-header-input.component';
+import {TokenHeaderForDirective} from './token-header-for.directive';
+import {TokenHeaderInputComponent} from './token-header-input/token-header-input.component';
+import {RegexVariableComponent} from './regex-variable/regex-variable.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
     declarations: [
@@ -36,6 +41,7 @@ import { TokenHeaderInputComponent } from './token-header-input/token-header-inp
         RegexTokenDisposalComponent,
         TokenHeaderForDirective,
         TokenHeaderInputComponent,
+        RegexVariableComponent,
     ],
     imports: [
         BrowserModule,
@@ -44,7 +50,11 @@ import { TokenHeaderInputComponent } from './token-header-input/token-header-inp
         MatCheckboxModule,
         BasicModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatTooltipModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -6,7 +6,7 @@ export class NewLineToken extends RegexToken {
     }
 
     public compile(): string {
-        return "\\n";
+        return "\n";
     }
 
     public override createInstance(): RegexToken {
