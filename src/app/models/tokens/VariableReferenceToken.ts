@@ -7,13 +7,7 @@ export class VariableReferenceToken extends RegexToken {
     }
 
     public compile(builder: RegexBuilderService): string {
-        return this.getToken(builder).compile(builder);
-    }
-
-    public getToken(builder: RegexBuilderService) {
-        let found = builder.variables.get(this.name);
-        if (!found) throw "Invalid variable reference: " + this.name;
-        return found;
+        return builder.getCompiledVariable(this.name);
     }
 
     protected createInstance(): RegexToken {

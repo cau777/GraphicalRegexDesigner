@@ -9,60 +9,65 @@ import {VariableReferenceToken} from "./models/tokens/VariableReferenceToken";
     providedIn: 'root'
 })
 export class RegexBuilderService {
-    public variables: Map<string, MainToken>;
+    public variables: Map<string | "Regex", MainToken>;
     public result = "";
     public generalErrors: string[];
-    public error?: string;
+    public errors: Map<string | "Regex", string>;
 
     private _assertStart = false;
     private _assertEnd = false;
     private _escapeBackslash = false;
+    private compiledVariables: Map<string | "Regex", string>;
 
     public constructor() {
         this.variables = new Map<string, MainToken>();
         this.defaultVariablesSetup();
         this.generalErrors = [];
-
+        this.compiledVariables = new Map<string, string>();
+        this.errors = new Map<string, string>();
     }
 
     public generateRegex() {
-        try {
-            let graph = this.createGraph();
-            let cycles = graph.getCycles();
-            let connectedVariables = cycles.filter(o => o.length > 1);
+        this.compiledVariables.clear();
+        this.errors.clear();
 
-            if (connectedVariables.length > 0) {
-                this.generalErrors = connectedVariables.map(o => "Variables '" + o.join("', '") + "' form a circular dependency");
+        let graph = this.createGraph();
+        let cycles = graph.getCycles();
+        let connectedVariables = cycles.filter(o => o.length > 1);
+
+        if (connectedVariables.length > 0) {
+            this.generalErrors = connectedVariables.map(o => "Variables '" + o.join("', '") + "' form a circular dependency");
+            return;
+        }
+
+        let order = graph.getOrderFor("Regex");
+        for (let step of order) {
+            try {
+                this.compiledVariables.set(step, this.variables.get(step)!.compile(this));
+            } catch (e) {
+                this.errors.set(step, e as string);
                 return;
             }
-
-            let regex = "";
-
-            if (this._assertStart) regex += "^";
-
-            regex += this.mainRegexToken.compile(this);
-
-            if (this._assertEnd)
-                regex += "$";
-
-            if (this._escapeBackslash)
-                regex = regex.replace(/\\/g, "\\\\");
-
-            regex = regex.replace("\n", "\\n").replace("\t", "\\t");
-
-            this.result = regex;
-            this.error = undefined;
-        } catch (e) {
-            this.error = e as string;
-            console.log(this.error)
         }
+
+        let regex = this.getCompiledVariable("Regex");
+
+        if (this._assertStart)
+            regex = "^" + regex;
+
+        if (this._assertEnd)
+            regex += "$";
+
+        if (this._escapeBackslash)
+            regex = regex.replace(/\\/g, "\\\\");
+
+        regex = regex.replace("\n", "\\n").replace("\t", "\\t");
+
+        this.result = regex;
     }
 
     private createGraph() {
         let result = new DirectGraph<string>();
-        for (let value of this.variables.values()) {
-            result.addNode(value.name);
-        }
 
         for (let value of this.variables.values()) {
             let variables = value.allChildren.filter(o => o instanceof VariableReferenceToken);
@@ -71,8 +76,13 @@ export class RegexBuilderService {
             }
         }
 
-        // console.log(JSON.stringify(result));
         return result;
+    }
+
+    public getCompiledVariable(name: string) {
+        let found = this.compiledVariables.get(name);
+        if (found === undefined) throw new RangeError(name + " was not compiled");
+        return found;
     }
 
     public get userDefinedVariables() {
@@ -118,6 +128,7 @@ export class RegexBuilderService {
     public newVariable() {
         let name = this.getNewVariableName();
         this.variables.set(name, new MainToken(name, false));
+        this.generateRegex();
     }
 
     private getNewVariableName() {
@@ -132,6 +143,7 @@ export class RegexBuilderService {
     public clear() {
         this.variables.clear();
         this.defaultVariablesSetup();
+        this.generateRegex();
     }
 
     public defaultVariablesSetup() {
@@ -146,5 +158,6 @@ export class RegexBuilderService {
         const deleted = this.variables.delete(name);
         if (!deleted) throw new Error("Invalid name: " + name);
         // TODO: remove invalid references
+        this.generateRegex();
     }
 }

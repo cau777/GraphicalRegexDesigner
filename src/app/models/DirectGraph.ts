@@ -24,12 +24,12 @@ class TarjanStrongConnectedComponents {
     public apply() {
         for (let i = 0; i < this.length; i++) {
             if (this.ids[i] === this.UnvisitedNodeId) {
-                this.depthForSearch(i);
+                this.depthFirstSearch(i);
             }
         }
     }
 
-    private depthForSearch(id: number) {
+    private depthFirstSearch(id: number) {
         this.stack.push(id);
         this.onStack[id] = true;
         this.ids[id] = this.currentId++;
@@ -37,7 +37,7 @@ class TarjanStrongConnectedComponents {
 
         for (let adjacent of this.adjacency[id]) {
             if (this.ids[adjacent] === this.UnvisitedNodeId)
-                this.depthForSearch(adjacent);
+                this.depthFirstSearch(adjacent);
 
             if (this.onStack[adjacent])
                 this.lowLength[id] = Math.min(this.lowLength[id], this.lowLength[adjacent]);
@@ -89,8 +89,8 @@ export class DirectGraph<T> {
         this.addNode(node1);
         this.addNode(node2);
 
-        let index1 = this.nodes.findIndex(o => o === node1);
-        let index2 = this.nodes.findIndex(o => o === node2);
+        let index1 = this.nodes.indexOf(node1);
+        let index2 = this.nodes.indexOf(node2);
 
         this.adjacency[index1].push(index2);
     }
@@ -99,5 +99,23 @@ export class DirectGraph<T> {
         let algorithm: TarjanStrongConnectedComponents = new TarjanStrongConnectedComponents(this);
         algorithm.apply();
         return algorithm.sccIndexes.map(o => o.map(p => this.nodes[p]))
+    }
+
+    public getOrderFor(node: T) {
+        let targetIndex = this.nodes.indexOf(node);
+        let result: T[] = [];
+        let isVisited: boolean[] = new Array(this.length).fill(false);
+        this.getOrderForRecursive(targetIndex, isVisited, result);
+        return result;
+    }
+
+    private getOrderForRecursive(index: number, isVisited: boolean[], result: T[]) {
+        isVisited[index] = true;
+
+        for (let connected of this.adjacency[index]) {
+            this.getOrderForRecursive(connected, isVisited, result);
+        }
+
+        result.push(this.nodes[index]);
     }
 }
