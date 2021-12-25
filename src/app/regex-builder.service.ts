@@ -171,12 +171,6 @@ export class RegexBuilderService {
         found.name = newName;
         this.variables.set(newName, found);
 
-        // let l = "";
-        // for (const entry of this.variables.entries()) {
-        //     l += JSON.stringify(entry, undefined, 1);
-        // }
-        // console.log(l);
-
         for (let token of this.variables.values()) {
             for (let child of token.allChildren) {
                 if (child instanceof VariableReferenceToken && child.name === oldName)
