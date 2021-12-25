@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+    {{data.prompt}}
+    <br/>
+    <input matInput class="simple-input" (input)="onInput($event)">
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onClose()">Close</button>
+    <button mat-button [mat-dialog-close]="value">Ok</button>
+</div>

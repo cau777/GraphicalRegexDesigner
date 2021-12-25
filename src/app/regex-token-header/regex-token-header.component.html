@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="part.type">
+    <app-token-header-input *ngSwitchCase="'input'" [token]="token" [index]="part.index!"></app-token-header-input>
+    <div *ngSwitchCase="'newline'" class="flex-break"></div>
+    <span *ngSwitchDefault [innerHTML]="part.content!"></span>
+</ng-container>

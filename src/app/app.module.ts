@@ -18,13 +18,13 @@ import {BasicModule} from "./basic/basic.module";
 import {RegexTokenDisposalComponent} from './regex-token-disposal/regex-token-disposal.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {TokenHeaderForDirective} from './token-header-for.directive';
 import {TokenHeaderInputComponent} from './token-header-input/token-header-input.component';
 import {RegexVariableComponent} from './regex-variable/regex-variable.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
+import { RegexTokenHeaderComponent } from './regex-token-header/regex-token-header.component';
 
 @NgModule({
     declarations: [
@@ -39,9 +39,9 @@ import {MatDividerModule} from "@angular/material/divider";
         AvailableTokensComponent,
         RegexTokenComponent,
         RegexTokenDisposalComponent,
-        TokenHeaderForDirective,
         TokenHeaderInputComponent,
         RegexVariableComponent,
+        RegexTokenHeaderComponent,
     ],
     imports: [
         BrowserModule,

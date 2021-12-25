@@ -68,6 +68,7 @@ export class RegexBuilderService {
 
     private createGraph() {
         let result = new DirectGraph<string>();
+        result.addNode("Regex");
 
         for (let value of this.variables.values()) {
             let variables = value.allChildren.filter(o => o instanceof VariableReferenceToken);
@@ -159,5 +160,28 @@ export class RegexBuilderService {
         if (!deleted) throw new Error("Invalid name: " + name);
         // TODO: remove invalid references
         this.generateRegex();
+    }
+
+    public rename(oldName: string, newName: string) {
+        console.log("renaming " + oldName + " to " + newName)
+        let found = this.variables.get(oldName);
+        if (!found) throw new RangeError(oldName + " was not a variable");
+
+        this.variables.delete(oldName);
+        found.name = newName;
+        this.variables.set(newName, found);
+
+        // let l = "";
+        // for (const entry of this.variables.entries()) {
+        //     l += JSON.stringify(entry, undefined, 1);
+        // }
+        // console.log(l);
+
+        for (let token of this.variables.values()) {
+            for (let child of token.allChildren) {
+                if (child instanceof VariableReferenceToken && child.name === oldName)
+                    child.name = newName;
+            }
+        }
     }
 }

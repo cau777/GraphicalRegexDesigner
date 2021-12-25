@@ -1,10 +1,12 @@
 import {RegexBuilderService} from "../regex-builder.service";
+import {IHeaderPart} from "./IHeaderPart";
 
 export abstract class RegexToken {
     private static readonly light = 60;
     public readonly centerColor: string;
-    public readonly header: (string | "input")[];
-    public values: string[];
+    public header!: IHeaderPart[];
+    public values!: string[];
+    private _name!: string;
 
     // Exception constants
     protected cantBeEmpty = () => this.name + " can't be empty";
@@ -15,29 +17,41 @@ export abstract class RegexToken {
     protected invalidVal = () => "Invalid value at " + this.name;
     protected childrenOneLen = () => "Children of " + this.name + " must be ranges or single literals";
 
-    protected constructor(
-        public readonly name: string,
-        public readonly borderColor: string,
-        public readonly acceptsChildren: boolean,
-        public readonly children: RegexToken[] = [],) {
-
+    protected constructor(name: string,
+                          public readonly borderColor: string,
+                          public readonly acceptsChildren: boolean,
+                          public readonly children: RegexToken[] = []) {
+        this.name = name;
         this.centerColor = RegexToken.lightenColor(this.borderColor);
+    }
+
+    public get name() {
+        return this._name;
+    }
+
+    public set name(value: string) {
+        this._name = value;
+        this.updateHeader();
+    }
+
+    private updateHeader() {
         this.header = [];
         this.values = [];
 
-        let index = name.indexOf("{}");
+        let index = this._name.indexOf("{}");
         let start = 0;
+        let inputIndex = 0;
 
         while (index !== -1) {
             this.values.push("");
-            let text = name.substring(start, index)
+            let text = this._name.substring(start, index)
             this.header.push(...RegexToken.separateNewLines(text));
-            this.header.push("input");
+            this.header.push({type: "input", index: inputIndex++});
             start = index + 2;
-            index = name.indexOf("{}", start);
+            index = this._name.indexOf("{}", start);
         }
 
-        let rest = name.substring(start);
+        let rest = this._name.substring(start);
         if (rest) this.header.push(...RegexToken.separateNewLines(rest));
     }
 
@@ -76,14 +90,14 @@ export abstract class RegexToken {
         return "#" + sr + sg + sb;
     }
 
-    private static separateNewLines(text: string): string[] {
+    private static separateNewLines(text: string): IHeaderPart[] {
         let parts = text.split("\n");
-        let results = [];
+        let results: IHeaderPart[] = [];
 
         for (let i = 0; i < parts.length; i++) {
-            results.push(parts[i]);
+            results.push({type: "text", content: parts[i]});
             if (i !== parts.length - 1)
-                results.push("newline");
+                results.push({type: "newline"});
         }
 
         return results;

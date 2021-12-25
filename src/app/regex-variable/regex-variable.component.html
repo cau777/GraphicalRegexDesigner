@@ -1,7 +1,7 @@
 <div class="d-flex flex-row mb-2">
     <app-regex-token [token]="token"></app-regex-token>
     <div class="d-flex flex-column ms-sm-1">
-        <button mat-icon-button class="small" matTooltip="Rename variable">
+        <button mat-icon-button class="small" matTooltip="Rename variable" (click)="this.rename()">
             <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button class="small" matTooltip="Remove variable" (click)="regexBuilder.removeVariable(token.name)">

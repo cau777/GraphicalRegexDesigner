@@ -20,6 +20,12 @@ each(range(1, 20, 1), {
     }
 });
 
+each(range(1, 20, 1), {
+    .black-@{value} {
+        background-color: rgba(0, 0, 0, (@value / 100));
+    }
+});
+
 .black-border {
     border: solid rgba(0, 0, 0, 0.5) 1px;
 }

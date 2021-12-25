@@ -1,12 +1,7 @@
 <div class="token" [ngStyle]="{'background-color': token.borderColor}">
     <header>
-        <ng-container *appTokenHeaderFor="token; let isInput = isInput; let inputIndex = inputIndex; let text = text">
-            <ng-container [ngSwitch]="text">
-                <app-token-header-input *ngSwitchCase="'input'" [token]="token"
-                                        [index]="inputIndex"></app-token-header-input>
-                <div *ngSwitchCase="'newline'" class="flex-break"></div>
-                <span *ngSwitchDefault [innerHTML]="text"></span>
-            </ng-container>
+        <ng-container *ngFor="let part of token.header">
+            <app-regex-token-header [token]="token" [part]="part"></app-regex-token-header>
         </ng-container>
     </header>
     <div class="inner flex-fill" [ngStyle]="getInnerStyle()" (mouseup)="onMouseUpInner($event)" *ngIf="token.acceptsChildren">
