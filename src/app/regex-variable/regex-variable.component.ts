@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {InputDialogComponent} from "../basic/input-dialog/input-dialog.component";
 import {IInputDialogData} from "../basic/input-dialog/IInputDialogData";
 import {ConfirmDialogComponent} from "../basic/confirm-dialog/confirm-dialog.component";
+import {ErrorDialogComponent} from "../basic/error-dialog/error-dialog.component";
 
 @Component({
     selector: 'app-regex-variable',
@@ -29,7 +30,16 @@ export class RegexVariableComponent {
         dialogRef.afterClosed().subscribe(result => {
             if (!result) return;
             if (result.length === 1) return;
-            this.regexBuilder.rename(this.token.name, result);
+
+            try {
+                this.regexBuilder.rename(this.token.name, result);
+            } catch (e) {
+                if (e instanceof Error) {
+                    this.dialog.open<ErrorDialogComponent, string>(ErrorDialogComponent, {
+                        data: e.message
+                    });
+                }
+            }
         })
     }
 

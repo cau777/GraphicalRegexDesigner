@@ -181,13 +181,24 @@ export class RegexBuilderService {
         return references;
     }
 
-    public rename(oldName: string, newName: string) { // TODO: keep order
+    public rename(oldName: string, newName: string) {
         let found = this.variables.get(oldName);
-        if (!found) throw new RangeError(oldName + " was not a variable");
+        if (!found) throw new Error(oldName + " was not a variable");
 
-        this.variables.delete(oldName);
+        if (newName === "Regex") throw new Error("Regex is a reserved name");
+        if (this.variables.has(newName)) throw new Error(newName + " is already defined");
+
         found.name = newName;
-        this.variables.set(newName, found);
+
+        let newEntries: [(string | "Regex"), MainToken][] = [];
+        for (let entry of this.variables.entries()) {
+            if (entry[1] === found) {
+                newEntries.push([newName, entry[1]]);
+            } else {
+                newEntries.push(entry);
+            }
+        }
+        this.variables = new Map<string | "Regex", MainToken>(newEntries);
 
         for (let token of this.variables.values()) {
             for (let child of token.allChildren) {

@@ -9,6 +9,7 @@ import { InputDialogComponent } from './input-dialog/input-dialog.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 // Basic and generic components
 @NgModule({
@@ -17,7 +18,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
         DraggingElementComponent,
         SimpleErrorComponent,
         InputDialogComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        ErrorDialogComponent
     ],
     imports: [
         CommonModule,

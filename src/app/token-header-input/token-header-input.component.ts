@@ -20,7 +20,6 @@ export class TokenHeaderInputComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        console.log(this.index)
         let child = this.element.nativeElement.querySelector(".input") as HTMLSpanElement;
         child.innerText = this.token.values[this.index];
         this.updateSpacesString(this.token.values[this.index]);
