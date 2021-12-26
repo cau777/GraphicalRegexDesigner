@@ -1,6 +1,6 @@
-import {Component, Inject, Input} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {InputDialogData} from "./InputDialogData";
+import {IInputDialogData} from "./IInputDialogData";
 
 @Component({
   selector: 'app-input-dialog',
@@ -8,13 +8,10 @@ import {InputDialogData} from "./InputDialogData";
   styleUrls: ['./input-dialog.component.less']
 })
 export class InputDialogComponent {
-    @Input()
-    public inputLabel = "Label";
-
     public value?: string;
 
     public constructor(private dialog: MatDialogRef<InputDialogComponent, string | undefined>,
-                       @Inject(MAT_DIALOG_DATA) public data: InputDialogData) {
+                       @Inject(MAT_DIALOG_DATA) public data: IInputDialogData) {
     }
 
     public onClose() {

@@ -8,6 +8,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { InputDialogComponent } from './input-dialog/input-dialog.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 // Basic and generic components
 @NgModule({
@@ -15,7 +16,8 @@ import {MatInputModule} from "@angular/material/input";
         CardComponent,
         DraggingElementComponent,
         SimpleErrorComponent,
-        InputDialogComponent
+        InputDialogComponent,
+        ConfirmDialogComponent
     ],
     imports: [
         CommonModule,
@@ -28,7 +30,8 @@ import {MatInputModule} from "@angular/material/input";
         CardComponent,
         DraggingElementComponent,
         SimpleErrorComponent,
-        InputDialogComponent
+        InputDialogComponent,
+        ConfirmDialogComponent
     ]
 })
 export class BasicModule {}

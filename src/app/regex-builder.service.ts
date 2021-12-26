@@ -158,12 +158,30 @@ export class RegexBuilderService {
     public removeVariable(name: string) {
         const deleted = this.variables.delete(name);
         if (!deleted) throw new Error("Invalid name: " + name);
-        // TODO: remove invalid references
+
+        for (let variable of this.variables.values()) {
+            let children = variable.children;
+            for (let i = 0; i < children.length; i++) {
+                if (children[i] instanceof VariableReferenceToken && children[i].name === name) {
+                    children.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
         this.generateRegex();
     }
 
-    public rename(oldName: string, newName: string) {
-        console.log("renaming " + oldName + " to " + newName)
+    public getVariableReferences(name: string) {
+        let references: string[] = [];
+        for (let variable of this.variables.values()) {
+            if (variable.allChildren.some(o => o instanceof VariableReferenceToken && o.name === name))
+                references.push(variable.name);
+        }
+        return references;
+    }
+
+    public rename(oldName: string, newName: string) { // TODO: keep order
         let found = this.variables.get(oldName);
         if (!found) throw new RangeError(oldName + " was not a variable");
 
