@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
 import {RegexToken} from "../models/RegexToken";
 import {DragService} from "../drag.service";
 import {RegexBuilderService} from "../regex-builder.service";
+import {MouseEvent} from "ngx-bootstrap/utils/facade/browser";
 
 @Component({
     selector: 'app-regex-token',
@@ -15,7 +16,9 @@ export class RegexTokenComponent {
     @Output()
     public startDragging = new EventEmitter<Event>();
 
-    public constructor(private dragService: DragService, private regexBuilder: RegexBuilderService) {
+    public constructor(private dragService: DragService,
+                       private regexBuilder: RegexBuilderService,
+                       private element: ElementRef) {
     }
 
     public onMouseDown(e: Event) {
@@ -26,9 +29,11 @@ export class RegexTokenComponent {
     public onMouseUp(e: Event) {
         e.stopPropagation();
         e.preventDefault();
+        let mouse = e as MouseEvent;
 
         if (this.dragService.currentlyDragging) {
-            this.token.children.push(this.dragService.currentlyDragging);
+            let pos = this.findInsertionPos(mouse.x, mouse.y);
+            this.token.children.splice(pos, 0, this.dragService.currentlyDragging);
             this.dragService.stopDragging();
             this.regexBuilder.generateRegex();
         }
@@ -44,5 +49,34 @@ export class RegexTokenComponent {
         });
         this.token.children.splice(i, 1);
         this.regexBuilder.generateRegex();
+    }
+
+    private findInsertionPos(x: number, y: number) {
+        let childrenElement = (this.element.nativeElement as HTMLElement).querySelector(".children") as HTMLDivElement;
+        let children = childrenElement.children;
+
+        if (children.length === 0) return 0;
+
+        let start = childrenElement.getBoundingClientRect().x;
+        let indexRowOffset: number = -1;
+
+        let childrenWidths: number[] = [start];
+
+        for (let i = 0; i < children.length; i++) {
+            let rect = children[i].getBoundingClientRect();
+            if (rect.top <= y && rect.bottom >= y) {
+                if (indexRowOffset === -1) indexRowOffset = i;
+                childrenWidths.push(rect.right);
+            }
+        }
+
+        for (let i = 0; i < childrenWidths.length - 1; i++) {
+            let middle = (childrenWidths[i] + childrenWidths[i + 1]) / 2;
+
+            if (x < middle)
+                return indexRowOffset + i;
+        }
+
+        return children.length;
     }
 }

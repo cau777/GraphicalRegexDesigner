@@ -59,7 +59,7 @@ export class RegexBuilderService {
             regex += "$";
 
         if (this._escapeBackslash)
-            regex = regex.replace(/\\/g, "\\\\");
+            regex = regex.replace(/\\/g, "\\\\"); // TODO: remove escaping in []
 
         regex = regex.replace("\n", "\\n").replace("\t", "\\t");
 
