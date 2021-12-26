@@ -1,16 +1,19 @@
 import {RegexToken} from "../RegexToken";
-import {RegexBuilderService} from "../../regex-builder.service";
 import {AllChars, Digits} from "../../misc/string-constants";
+import {RegexCompiler} from "../../regex-compiler";
 
 export abstract class AlternativesToken extends RegexToken {
-    protected compileAndConcatUnique(builder: RegexBuilderService) {
+    private static readonly uniqueInSetIgnored = new Set(["\\"]);
+
+    protected compileAndConcatUnique(builder: RegexCompiler) {
         let all = this.compileAndConcatChildren(builder);
         let alreadyUsed = new Set();
         let result = "";
 
         for (let char of all) {
             if (alreadyUsed.has(char)) continue;
-            alreadyUsed.add(char);
+            if (!AlternativesToken.uniqueInSetIgnored.has(char))
+                alreadyUsed.add(char);
             result += char;
         }
 

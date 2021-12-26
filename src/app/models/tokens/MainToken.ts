@@ -1,5 +1,5 @@
 import {RegexToken} from "../RegexToken";
-import {RegexBuilderService} from "../../regex-builder.service";
+import {RegexCompiler} from "../../regex-compiler";
 
 export class MainToken extends RegexToken {
     public isPredefined: boolean;
@@ -9,7 +9,7 @@ export class MainToken extends RegexToken {
         this.isPredefined = isPredefined;
     }
 
-    public compile(builder: RegexBuilderService): string {
+    public compile(builder: RegexCompiler): string {
         return this.compileAndConcatChildren(builder);
     }
 

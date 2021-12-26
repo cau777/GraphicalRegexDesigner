@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './regex-testing.component.html',
   styleUrls: ['./regex-testing.component.less']
 })
-export class RegexTestingComponent implements OnInit {
+export class RegexTestingComponent implements OnInit { // TODO: implement
 
   constructor() { }
 

@@ -1,10 +1,10 @@
 import {RegexToken} from "../RegexToken";
-import {RegexBuilderService} from "../../regex-builder.service";
+import {RegexCompiler} from "../../regex-compiler";
 
 export abstract class PrevCharModifierToken extends RegexToken {
     protected abstract get token(): string;
 
-    public compile(builder: RegexBuilderService): string {
+    public compile(builder: RegexCompiler): string {
         if (this.children.length === 0)
             throw this.mustHaveChildren();
 

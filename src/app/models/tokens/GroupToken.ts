@@ -1,12 +1,12 @@
 import {RegexToken} from "../RegexToken";
-import {RegexBuilderService} from "../../regex-builder.service";
+import {RegexCompiler} from "../../regex-compiler";
 
 export class GroupToken extends RegexToken{
     public constructor() {
         super("Group", "#dddf6a", true);
     }
 
-    public compile(builder: RegexBuilderService): string {
+    public compile(builder: RegexCompiler): string {
         return "(" + this.compileAndConcatChildren(builder) + ")";
     }
 

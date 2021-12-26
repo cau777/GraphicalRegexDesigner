@@ -1,5 +1,5 @@
 <app-card [title]="'Builder'">
-    <app-simple-error *ngFor="let error of regexBuilder.generalErrors" [error]="error"></app-simple-error>
+    <app-simple-error *ngFor="let error of regexBuilder.result.generalErrors" [error]="error"></app-simple-error>
 
     <!--suppress HtmlUnknownBooleanAttribute -->
     <div class="ms-auto" cardHeader>
@@ -12,7 +12,7 @@
     </div>
 
     <app-regex-token [token]="regexBuilder.mainRegexToken"></app-regex-token>
-    <app-simple-error [error]="regexBuilder.errors.get('Regex')"></app-simple-error>
+    <app-simple-error [error]="regexBuilder.result.errors.get('Regex')"></app-simple-error>
 
     <hr *ngIf="regexBuilder.userDefinedVariables.length !== 0"/>
 

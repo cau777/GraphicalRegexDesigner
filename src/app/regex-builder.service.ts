@@ -2,88 +2,31 @@ import {Injectable} from '@angular/core';
 import {MainToken} from "./models/tokens/MainToken";
 import {LiteralToken} from "./models/tokens/LiteralToken";
 import {Upper, Lower, AllChars, Digits} from "./misc/string-constants";
-import {DirectGraph} from "./models/DirectGraph";
 import {VariableReferenceToken} from "./models/tokens/VariableReferenceToken";
+import {RegexOptions} from "./models/RegexOptions";
+import {RegexCompiler} from "./regex-compiler";
+import {RegexCompilationResult} from "./models/RegexCompilationResult";
 
 @Injectable({
     providedIn: 'root'
 })
 export class RegexBuilderService {
     public variables: Map<string | "Regex", MainToken>;
-    public result = "";
-    public generalErrors: string[];
-    public errors: Map<string | "Regex", string>;
+    public result: RegexCompilationResult;
 
-    private _assertStart = false;
-    private _assertEnd = false;
-    private _escapeBackslash = false;
-    private compiledVariables: Map<string | "Regex", string>;
+    private readonly options: RegexOptions;
 
     public constructor() {
         this.variables = new Map<string, MainToken>();
         this.defaultVariablesSetup();
-        this.generalErrors = [];
-        this.compiledVariables = new Map<string, string>();
-        this.errors = new Map<string, string>();
+        this.options = new RegexOptions();
+        this.result = new RegexCompilationResult();
     }
 
     public generateRegex() {
-        this.compiledVariables.clear();
-        this.errors.clear();
-
-        let graph = this.createGraph();
-        let cycles = graph.getCycles();
-        let connectedVariables = cycles.filter(o => o.length > 1);
-
-        if (connectedVariables.length > 0) {
-            this.generalErrors = connectedVariables.map(o => "Variables '" + o.join("', '") + "' form a circular dependency");
-            return;
-        }
-
-        let order = graph.getOrderFor("Regex");
-        for (let step of order) {
-            try {
-                this.compiledVariables.set(step, this.variables.get(step)!.compile(this));
-            } catch (e) {
-                this.errors.set(step, e as string);
-                return;
-            }
-        }
-
-        let regex = this.getCompiledVariable("Regex");
-
-        if (this._assertStart)
-            regex = "^" + regex;
-
-        if (this._assertEnd)
-            regex += "$";
-
-        if (this._escapeBackslash)
-            regex = regex.replace(/\\/g, "\\\\"); // TODO: remove escaping in []
-
-        regex = regex.replace("\n", "\\n").replace("\t", "\\t");
-
-        this.result = regex;
-    }
-
-    private createGraph() {
-        let result = new DirectGraph<string>();
-        result.addNode("Regex");
-
-        for (let value of this.variables.values()) {
-            let variables = value.allChildren.filter(o => o instanceof VariableReferenceToken);
-            for (let variable of variables) {
-                result.addEdge(value.name, variable.name);
-            }
-        }
-
-        return result;
-    }
-
-    public getCompiledVariable(name: string) {
-        let found = this.compiledVariables.get(name);
-        if (found === undefined) throw new RangeError(name + " was not compiled");
-        return found;
+        let compiler = new RegexCompiler(this.variables);
+        compiler.compile(this.options);
+        this.result = compiler.result;
     }
 
     public get userDefinedVariables() {
@@ -100,17 +43,17 @@ export class RegexBuilderService {
     }
 
     public set assertStart(value: boolean) {
-        this._assertStart = value;
+        this.options.assertStart = value;
         this.generateRegex();
     }
 
     public set assertEnd(value: boolean) {
-        this._assertEnd = value;
+        this.options.assertEnd = value;
         this.generateRegex();
     }
 
     public set escapeBackslash(value: boolean) {
-        this._escapeBackslash = value;
+        this.options.escapeBackslashes = value;
         this.generateRegex();
     }
 

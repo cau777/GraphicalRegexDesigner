@@ -1,13 +1,13 @@
 import {RegexToken} from "../RegexToken";
-import {RegexBuilderService} from "../../regex-builder.service";
 import {AlternativesToken} from "./AlternativesToken";
+import {RegexCompiler} from "../../regex-compiler";
 
 export class NegativeCharAlternativesToken extends AlternativesToken {
     public constructor() {
         super("None of characters", "#f285bc", true);
     }
 
-    public compile(builder: RegexBuilderService): string {
+    public compile(builder: RegexCompiler): string {
         if (this.children.length === 0)
             throw this.mustHaveChildren();
 

@@ -1,5 +1,5 @@
-import {RegexBuilderService} from "../regex-builder.service";
 import {IHeaderPart} from "./IHeaderPart";
+import {RegexCompiler} from "../regex-compiler";
 
 export abstract class RegexToken {
     private static readonly light = 60;
@@ -55,7 +55,7 @@ export abstract class RegexToken {
         if (rest) this.header.push(...RegexToken.separateNewLines(rest));
     }
 
-    public abstract compile(builder: RegexBuilderService): string;
+    public abstract compile(builder: RegexCompiler): string;
 
     protected abstract createInstance(): RegexToken;
 
@@ -65,7 +65,7 @@ export abstract class RegexToken {
         return target;
     }
 
-    protected compileAndConcatChildren(builder: RegexBuilderService) {
+    protected compileAndConcatChildren(builder: RegexCompiler) {
         if (this.children.length === 0) return "";
         return this.children.map(o => o.compile(builder)).reduce((s1, s2) => s1 + s2);
     }
