@@ -41,7 +41,7 @@ export class RegexTestingMatchesComponent implements OnChanges {
 
             result.push({
                 start: index,
-                end: index + match.length,
+                end: index + match[0].length,
                 groups: match.map(o => o)
             });
         }
