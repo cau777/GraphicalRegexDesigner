@@ -1,0 +1,17 @@
+<mat-accordion *ngIf="matches.length !== 0">
+    <div class="match" *ngFor="let match of matches; let index = index;">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                Match {{index}}: {{match.start}}-{{match.end}} "{{match.groups[0]}}"
+            </mat-expansion-panel-header>
+
+            <p>
+                <span *ngFor="let group of match.groups; let index = index">
+                    Group {{index}} = "{{group}}"
+                </span>
+            </p>
+        </mat-expansion-panel>
+    </div>
+</mat-accordion>
+
+<p *ngIf="matches.length === 0">No matches</p>

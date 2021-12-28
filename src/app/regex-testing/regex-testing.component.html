@@ -1,3 +1,5 @@
 <app-card [title]="'Testing'">
-    Test
+    <textarea class="simple-textarea" [rows]="textRows" (input)="onTextInput($event)"></textarea>
+
+    <app-regex-testing-matches [text]="text" [regex]="regexBuilder.result.testingRegex"></app-regex-testing-matches>
 </app-card>

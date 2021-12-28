@@ -47,6 +47,19 @@ each(range(1, 20, 1), {
     }
 }
 
+.simple-textarea {
+    .black-border();
+    background-color: rgba(0, 0, 0, 0.15);
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+
+    &:focus {
+        outline: none !important;
+        border-color: @primaryLighter;
+    }
+}
+
 .token {
     color: black;
     font-weight: 500;

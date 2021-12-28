@@ -25,6 +25,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {RegexTokenHeaderComponent} from './regex-token-header/regex-token-header.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import { RegexTestingMatchesComponent } from './regex-testing-matches/regex-testing-matches.component';
 
 @NgModule({
     declarations: [
@@ -42,6 +44,7 @@ import {RegexTokenHeaderComponent} from './regex-token-header/regex-token-header
         TokenHeaderInputComponent,
         RegexVariableComponent,
         RegexTokenHeaderComponent,
+        RegexTestingMatchesComponent,
     ],
     imports: [
         BrowserModule,
@@ -54,7 +57,8 @@ import {RegexTokenHeaderComponent} from './regex-token-header/regex-token-header
         MatTooltipModule,
         MatButtonModule,
         MatIconModule,
-        MatDividerModule
+        MatDividerModule,
+        MatExpansionModule
     ],
     providers: [],
     bootstrap: [AppComponent]
