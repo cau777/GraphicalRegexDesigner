@@ -52,12 +52,15 @@ export class RegexCompiler {
         if (options.escapeBackslashes)
             regex = this.escapeBackslashes(regex);
         regex = this.replaceSpecialCharacters(regex);
+        regex = "/" + regex + "/" + this.createFlagsString(options);
 
         return regex;
     }
 
     private finishCompilingTesting(regex: string, options: RegexOptions) {
-        return regex;
+        if (regex.length === 0) return undefined;
+
+        return new RegExp(regex, this.createFlagsString(options));
     }
 
     private escapeBackslashes(regex: string) {
@@ -82,6 +85,13 @@ export class RegexCompiler {
         }
 
         return result;
+    }
+
+    private createFlagsString(options: RegexOptions) {
+        let flags = "";
+        if (!options.onlyFirst) flags += "g";
+        if (options.caseInsensitive) flags += "i";
+        return flags;
     }
 
     public getCompiledVariable(name: string) {

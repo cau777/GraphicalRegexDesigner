@@ -57,6 +57,16 @@ export class RegexBuilderService {
         this.generateRegex();
     }
 
+    public set onlyFirst(value: boolean){
+        this.options.onlyFirst = value;
+        this.generateRegex();
+    }
+
+    public set caseInsensitive(value: boolean) {
+        this.options.caseInsensitive = value;
+        this.generateRegex();
+    }
+
     private createLiteralsVariable(name: string, literals: string) {
         let children = [];
 

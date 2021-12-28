@@ -4,4 +4,8 @@
     <mat-checkbox (change)="regexBuilderService.assertEnd = $event.checked">Match ends at the last character of the string</mat-checkbox>
     <br/>
     <mat-checkbox (change)="regexBuilderService.escapeBackslash = $event.checked">Escape backslashes (\)</mat-checkbox>
+    <br/>
+    <mat-checkbox (change)="regexBuilderService.onlyFirst = $event.checked">Stop after first match</mat-checkbox>
+    <br/>
+    <mat-checkbox (change)="regexBuilderService.caseInsensitive = $event.checked">Case insensitive</mat-checkbox>
 </app-card>

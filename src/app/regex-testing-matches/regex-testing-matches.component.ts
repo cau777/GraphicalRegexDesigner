@@ -6,12 +6,12 @@ import {IMatchInfo} from "../regex-testing/regex-testing.component";
     templateUrl: './regex-testing-matches.component.html',
     styleUrls: ['./regex-testing-matches.component.less']
 })
-export class RegexTestingMatchesComponent implements OnChanges{
+export class RegexTestingMatchesComponent implements OnChanges {
     @Input()
     public text = "";
 
     @Input()
-    public regex = "";
+    public regex?: RegExp;
 
     public matches: IMatchInfo[] = [];
 
@@ -23,12 +23,18 @@ export class RegexTestingMatchesComponent implements OnChanges{
     }
 
     public findMatches(text: string) {
-        if (this.regex.length === 0)
+        if (!this.regex)
             return [];
 
-        let re = new RegExp(this.regex, "g");
         let result: IMatchInfo[] = [];
-        let matches = text.matchAll(re);
+        let matches: RegExpMatchArray[];
+
+        if (this.regex.global) {
+            matches = Array.from(text.matchAll(this.regex));
+        } else {
+            let match = text.match(this.regex);
+            matches = match ? [match] : [];
+        }
 
         for (let match of matches) {
             let index = match.index ?? 0;
