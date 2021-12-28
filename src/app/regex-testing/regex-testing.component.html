@@ -1,5 +1,8 @@
 <app-card [title]="'Testing'">
-    <textarea class="simple-textarea" [rows]="textRows" (input)="onTextInput($event)"></textarea>
+    <div class="wrapper">
+        <span class="spaces">{{spaces}}</span>
+        <textarea class="simple-textarea" [rows]="textRows" (input)="onTextInput($event)"></textarea>
+    </div>
 
     <app-regex-testing-matches [text]="text" [regex]="regexBuilder.result.testingRegex"></app-regex-testing-matches>
 </app-card>
