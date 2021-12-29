@@ -29,7 +29,7 @@ export class RegexCompiler {
         let order = graph.getOrderFor("Regex");
         for (let step of order) {
             try {
-                this.compiledVariables.set(step, this.variables.get(step)!.compile(this));
+                this.compiledVariables.set(step, this.variables.get(step)!.compile());
             } catch (e) {
                 this.result.errors.set(step, e as string);
                 return;

@@ -1,20 +1,20 @@
 import {RegexToken} from "../RegexToken";
 import {ITokenBuilder} from "../ITokenBuilder";
 
-export class GroupToken extends RegexToken {
+export class AnySymbolToken extends RegexToken {
     public constructor(builder: ITokenBuilder) {
-        super("Group", "#dddf6a", true, builder);
+        super("Any symbol","#4f84ec", false, builder);
     }
 
     public compile(): string {
-        return "(" + this.compileAndConcatChildren() + ")";
+        return ".";
     }
 
     protected createInstance(): RegexToken {
-        return new GroupToken(this.builder);
+        return new AnySymbolToken(this.builder);
     }
 
     public tooltip() {
-        return "A container to group elements";
+        return "Matches every symbol except new line";
     }
 }

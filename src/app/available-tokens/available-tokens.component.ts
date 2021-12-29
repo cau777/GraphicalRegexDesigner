@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnChanges} from '@angular/core';
 import {DragService} from "../drag.service";
-import {AnyCharacterToken} from "../models/tokens/AnyCharacterToken";
+import {AnySymbolToken} from "../models/tokens/AnySymbolToken";
 import {LiteralToken} from "../models/tokens/LiteralToken";
 import {OptionalToken} from "../models/tokens/OptionalToken";
 import {Plus0Times} from "../models/tokens/Plus0Times";
@@ -9,7 +9,7 @@ import {NewLineToken} from "../models/tokens/NewLineToken";
 import {MoreThanToken} from "../models/tokens/MoreThanToken";
 import {LessThanToken} from "../models/tokens/LessThanToken";
 import {BetweenTimesToken} from "../models/tokens/BetweenTimesToken";
-import {CharAlternativesToken} from "../models/tokens/CharAlternativesToken";
+import {SymbolAlternativesToken} from "../models/tokens/SymbolAlternativesToken";
 import {GroupToken} from "../models/tokens/GroupToken";
 import {ExactTimesToken} from "../models/tokens/ExactTimesToken";
 import {TabToken} from "../models/tokens/TabToken";
@@ -17,7 +17,7 @@ import {RegexBuilderService} from "../regex-builder.service";
 import {RegexToken} from "../models/RegexToken";
 import {VariableReferenceToken} from "../models/tokens/VariableReferenceToken";
 import {TermsAlternativesToken} from "../models/tokens/TermsAlternativesToken";
-import {NegativeCharAlternativesToken} from "../models/tokens/NegativeCharAlternativesToken";
+import {NegativeSymbolAlternativesToken} from "../models/tokens/NegativeSymbolAlternativesToken";
 import {RegexFragmentToken} from "../models/tokens/RegexFragmentToken";
 
 @Component({
@@ -25,37 +25,40 @@ import {RegexFragmentToken} from "../models/tokens/RegexFragmentToken";
     templateUrl: './available-tokens.component.html',
     styleUrls: ['./available-tokens.component.less']
 })
-export class AvailableTokensComponent {
-    private static readonly defaultTokens: RegexToken[] = [
-        new AnyCharacterToken(),
-        new LiteralToken(),
-        new OptionalToken(),
-        new Plus0Times(),
-        new Plus1Times(),
-        new ExactTimesToken(),
-        new MoreThanToken(),
-        new LessThanToken(),
-        new BetweenTimesToken(),
-        new CharAlternativesToken(),
-        new TermsAlternativesToken(),
-        new NegativeCharAlternativesToken(),
-        new RegexFragmentToken(),
-        new GroupToken(),
-        new NewLineToken(),
-        new TabToken(),
-    ];
-
+export class AvailableTokensComponent implements OnChanges {
+    public tokens: RegexToken[];
+    private readonly defaultTokens: RegexToken[];
     private query = "";
 
     public constructor(public dragService: DragService, private regexBuilder: RegexBuilderService) {
+        this.defaultTokens = [
+            new AnySymbolToken(this.regexBuilder),
+            new LiteralToken(this.regexBuilder),
+            new OptionalToken(this.regexBuilder),
+            new Plus0Times(this.regexBuilder),
+            new Plus1Times(this.regexBuilder),
+            new ExactTimesToken(this.regexBuilder),
+            new MoreThanToken(this.regexBuilder),
+            new LessThanToken(this.regexBuilder),
+            new BetweenTimesToken(this.regexBuilder),
+            new SymbolAlternativesToken(this.regexBuilder),
+            new TermsAlternativesToken(this.regexBuilder),
+            new NegativeSymbolAlternativesToken(this.regexBuilder),
+            new RegexFragmentToken(this.regexBuilder),
+            new GroupToken(this.regexBuilder),
+            new NewLineToken(this.regexBuilder),
+            new TabToken(this.regexBuilder),
+        ];
+
+        this.tokens = this.getTokens();
     }
 
     public getTokens() {
-        let tokens = [...AvailableTokensComponent.defaultTokens];
+        let tokens = [...this.defaultTokens];
 
         for (let variable of this.regexBuilder.variables.values()) {
             if (variable.name !== "Regex")
-                tokens.push(new VariableReferenceToken(variable.name));
+                tokens.push(new VariableReferenceToken(variable.name, this.regexBuilder));
         }
 
         if (this.query) {
@@ -69,6 +72,9 @@ export class AvailableTokensComponent {
     public onInputQuery(e: Event) {
         let element = e.target as HTMLInputElement;
         this.query = element.value;
-        console.log(element.scrollWidth);
+    }
+
+    public ngOnChanges() {
+        this.tokens = this.getTokens();
     }
 }

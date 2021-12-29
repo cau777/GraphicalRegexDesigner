@@ -1,9 +1,10 @@
 import {RegexToken} from "../RegexToken";
 import {PrevCharModifierToken} from "./PrevCharModifierToken";
+import {ITokenBuilder} from "../ITokenBuilder";
 
 export class ExactTimesToken extends PrevCharModifierToken {
-    public constructor() {
-        super("Exactly {} times", "#f694a3", true);
+    public constructor(builder: ITokenBuilder) {
+        super("Exactly {} times", "#f694a3", true, builder);
     }
 
     protected get token(): string {
@@ -15,6 +16,14 @@ export class ExactTimesToken extends PrevCharModifierToken {
     }
 
     protected createInstance(): RegexToken {
-        return new ExactTimesToken();
+        return new ExactTimesToken(this.builder);
+    }
+
+    public tooltip() {
+        let value = parseInt(this.values[0]);
+        if (isNaN(value))
+            return "Matches if its content appears exactly V times";
+
+        return "Matches if its content appears exactly " + value + " times";
     }
 }

@@ -1,9 +1,10 @@
 import {RegexToken} from "../RegexToken";
 import {PrevCharModifierToken} from "./PrevCharModifierToken";
+import {ITokenBuilder} from "../ITokenBuilder";
 
 export class MoreThanToken extends PrevCharModifierToken {
-    public constructor() {
-        super("More than {} times", "#ea8545", true);
+    public constructor(builder: ITokenBuilder) {
+        super("More than {} times", "#ea8545", true, builder);
     }
 
     protected get token() {
@@ -13,6 +14,14 @@ export class MoreThanToken extends PrevCharModifierToken {
     }
 
     protected createInstance(): RegexToken {
-        return new MoreThanToken();
+        return new MoreThanToken(this.builder);
+    }
+
+    public tooltip() {
+        let min = parseInt(this.values[0]);
+        if (isNaN(min))
+            return "Matches if its content appears more than V times (inclusive)";
+
+        return "Matches if its content appears more than " + min + " times (inclusive)";
     }
 }

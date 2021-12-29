@@ -1,8 +1,9 @@
 import {RegexToken} from "../RegexToken";
+import {ITokenBuilder} from "../ITokenBuilder";
 
 export class NewLineToken extends RegexToken {
-    public constructor() {
-        super("New line", "#ee6002", false);
+    public constructor(builder: ITokenBuilder) {
+        super("New line", "#ee6002", false, builder);
     }
 
     public compile(): string {
@@ -10,6 +11,10 @@ export class NewLineToken extends RegexToken {
     }
 
     public override createInstance(): RegexToken {
-        return new NewLineToken();
+        return new NewLineToken(this.builder);
+    }
+
+    public tooltip() {
+        return "New line character (\\n)";
     }
 }

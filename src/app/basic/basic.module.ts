@@ -10,6 +10,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
+import { SimpleInfoComponent } from './simple-info/simple-info.component';
 
 // Basic and generic components
 @NgModule({
@@ -20,6 +21,7 @@ import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
         InputDialogComponent,
         ConfirmDialogComponent,
         ErrorDialogComponent,
+        SimpleInfoComponent,
     ],
     imports: [
         CommonModule,
@@ -34,6 +36,7 @@ import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
         SimpleErrorComponent,
         InputDialogComponent,
         ConfirmDialogComponent,
+        SimpleInfoComponent
     ]
 })
 export class BasicModule {}

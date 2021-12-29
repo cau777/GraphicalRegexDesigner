@@ -1,4 +1,4 @@
-<div class="token" [ngStyle]="{'background-color': token.borderColor}">
+<div class="token" [ngStyle]="{'background-color': token.borderColor}" [matTooltip]="tooltip">
     <header>
         <ng-container *ngFor="let part of token.header">
             <app-regex-token-header [token]="token" [part]="part"></app-regex-token-header>

@@ -1,12 +1,11 @@
 import {RegexToken} from "../RegexToken";
 import {AllChars, Digits} from "../../misc/string-constants";
-import {RegexCompiler} from "../../regex-compiler";
 
 export abstract class AlternativesToken extends RegexToken {
     private static readonly uniqueInSetIgnored = new Set(["\\"]);
 
-    protected compileAndConcatUnique(builder: RegexCompiler) {
-        let all = this.compileAndConcatChildren(builder);
+    protected compileAndConcatUnique() {
+        let all = this.compileAndConcatChildren();
         let alreadyUsed = new Set();
         let result = "";
 

@@ -13,6 +13,7 @@ import {RegexCompilationResult} from "./models/RegexCompilationResult";
 export class RegexBuilderService {
     public variables: Map<string | "Regex", MainToken>;
     public result: RegexCompilationResult;
+    public compiler: RegexCompiler;
 
     private readonly options: RegexOptions;
 
@@ -21,12 +22,13 @@ export class RegexBuilderService {
         this.defaultVariablesSetup();
         this.options = new RegexOptions();
         this.result = new RegexCompilationResult();
+        this.compiler = new RegexCompiler(this.variables);
     }
 
     public generateRegex() {
-        let compiler = new RegexCompiler(this.variables);
-        compiler.compile(this.options);
-        this.result = compiler.result;
+        this.compiler = new RegexCompiler(this.variables);
+        this.compiler.compile(this.options);
+        this.result = this.compiler.result;
     }
 
     public get userDefinedVariables() {
@@ -71,17 +73,17 @@ export class RegexBuilderService {
         let children = [];
 
         for (let literal of literals) {
-            let token = new LiteralToken();
+            let token = new LiteralToken(this);
             token.values[0] = literal;
             children.push(token)
         }
 
-        this.variables.set(name, new MainToken(name, true, children));
+        this.variables.set(name, new MainToken(name, true, this, children));
     }
 
     public newVariable() {
         let name = this.getNewVariableName();
-        this.variables.set(name, new MainToken(name, false));
+        this.variables.set(name, new MainToken(name, false, this));
         this.generateRegex();
     }
 
@@ -101,7 +103,7 @@ export class RegexBuilderService {
     }
 
     public defaultVariablesSetup() {
-        this.variables.set("Regex", new MainToken("Regex", true));
+        this.variables.set("Regex", new MainToken("Regex", true, this));
         this.createLiteralsVariable("Upper letters", Upper);
         this.createLiteralsVariable("Lower letters", Lower);
         this.createLiteralsVariable("Letters", AllChars);

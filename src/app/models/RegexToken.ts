@@ -1,5 +1,5 @@
 import {IHeaderPart} from "./IHeaderPart";
-import {RegexCompiler} from "../regex-compiler";
+import {ITokenBuilder} from "./ITokenBuilder";
 
 export abstract class RegexToken {
     private static readonly light = 60;
@@ -15,11 +15,11 @@ export abstract class RegexToken {
     protected invalidMin = () => "Invalid minimum value at " + this.name;
     protected invalidMax = () => "Invalid maximum value at " + this.name;
     protected invalidVal = () => "Invalid value at " + this.name;
-    protected childrenOneLen = () => "Children of " + this.name + " must be ranges or single literals";
 
     protected constructor(name: string,
                           public readonly borderColor: string,
                           public readonly acceptsChildren: boolean,
+                          protected readonly builder: ITokenBuilder,
                           public readonly children: RegexToken[] = []) {
         this.name = name;
         this.centerColor = RegexToken.lightenColor(this.borderColor);
@@ -55,7 +55,9 @@ export abstract class RegexToken {
         if (rest) this.header.push(...RegexToken.separateNewLines(rest));
     }
 
-    public abstract compile(builder: RegexCompiler): string;
+    public abstract tooltip(): string | undefined;
+
+    public abstract compile(): string;
 
     protected abstract createInstance(): RegexToken;
 
@@ -65,9 +67,9 @@ export abstract class RegexToken {
         return target;
     }
 
-    protected compileAndConcatChildren(builder: RegexCompiler) {
+    protected compileAndConcatChildren() {
         if (this.children.length === 0) return "";
-        return this.children.map(o => o.compile(builder)).reduce((s1, s2) => s1 + s2);
+        return this.children.map(o => o.compile()).reduce((s1, s2) => s1 + s2);
     }
 
     private static lightenColor(hex: string) {
