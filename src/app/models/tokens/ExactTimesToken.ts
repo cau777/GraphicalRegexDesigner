@@ -8,7 +8,7 @@ export class ExactTimesToken extends PrevCharModifierToken {
     }
 
     protected get token(): string {
-        let value = parseInt(this.values[0]);
+        const value = parseInt(this.values[0]);
 
         if (isNaN(value)) throw this.invalidVal();
 
@@ -20,7 +20,7 @@ export class ExactTimesToken extends PrevCharModifierToken {
     }
 
     public tooltip() {
-        let value = parseInt(this.values[0]);
+        const value = parseInt(this.values[0]);
         if (isNaN(value))
             return "Matches if its content appears exactly V times";
 

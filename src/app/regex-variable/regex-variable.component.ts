@@ -21,7 +21,7 @@ export class RegexVariableComponent {
     }
 
     public rename() {
-        let dialogRef = this.dialog.open<InputDialogComponent, IInputDialogData, string | undefined>(InputDialogComponent, {
+        const dialogRef = this.dialog.open<InputDialogComponent, IInputDialogData, string | undefined>(InputDialogComponent, {
             data: {
                 prompt: "Renaming " + this.token.name,
             },
@@ -44,10 +44,10 @@ export class RegexVariableComponent {
     }
 
     public remove() {
-        let references = this.regexBuilder.getVariableReferences(this.token.name);
+        const references = this.regexBuilder.getVariableReferences(this.token.name);
 
         if (references.length !== 0) {
-            let dialogRef = this.dialog.open<ConfirmDialogComponent, string, boolean>(ConfirmDialogComponent, {
+            const dialogRef = this.dialog.open<ConfirmDialogComponent, string, boolean>(ConfirmDialogComponent, {
                 data: "This variable is referenced on '" + references.join("', '") + "'. Proceed?"
             });
 

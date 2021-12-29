@@ -32,8 +32,8 @@ export class RegexBuilderService {
     }
 
     public get userDefinedVariables() {
-        let userEntries: MainToken[] = [];
-        for (let entry of this.variables.values()) {
+        const userEntries: MainToken[] = [];
+        for (const entry of this.variables.values()) {
             if (!entry.isPredefined)
                 userEntries.push(entry);
         }
@@ -70,10 +70,10 @@ export class RegexBuilderService {
     }
 
     private createLiteralsVariable(name: string, literals: string) {
-        let children = [];
+        const children = [];
 
-        for (let literal of literals) {
-            let token = new LiteralToken(this);
+        for (const literal of literals) {
+            const token = new LiteralToken(this);
             token.values[0] = literal;
             children.push(token)
         }
@@ -82,7 +82,7 @@ export class RegexBuilderService {
     }
 
     public newVariable() {
-        let name = this.getNewVariableName();
+        const name = this.getNewVariableName();
         this.variables.set(name, new MainToken(name, false, this));
         this.generateRegex();
     }
@@ -114,8 +114,8 @@ export class RegexBuilderService {
         const deleted = this.variables.delete(name);
         if (!deleted) throw new Error("Invalid name: " + name);
 
-        for (let variable of this.variables.values()) {
-            let children = variable.children;
+        for (const variable of this.variables.values()) {
+            const children = variable.children;
             for (let i = 0; i < children.length; i++) {
                 if (children[i] instanceof VariableReferenceToken && children[i].name === name) {
                     children.splice(i, 1);
@@ -128,8 +128,8 @@ export class RegexBuilderService {
     }
 
     public getVariableReferences(name: string) {
-        let references: string[] = [];
-        for (let variable of this.variables.values()) {
+        const references: string[] = [];
+        for (const variable of this.variables.values()) {
             if (variable.allChildren.some(o => o instanceof VariableReferenceToken && o.name === name))
                 references.push(variable.name);
         }
@@ -137,7 +137,7 @@ export class RegexBuilderService {
     }
 
     public rename(oldName: string, newName: string) {
-        let found = this.variables.get(oldName);
+        const found = this.variables.get(oldName);
         if (!found) throw new Error(oldName + " was not a variable");
 
         if (newName === "Regex") throw new Error("Regex is a reserved name");
@@ -145,8 +145,8 @@ export class RegexBuilderService {
 
         found.name = newName;
 
-        let newEntries: [(string | "Regex"), MainToken][] = [];
-        for (let entry of this.variables.entries()) {
+        const newEntries: [(string | "Regex"), MainToken][] = [];
+        for (const entry of this.variables.entries()) {
             if (entry[1] === found) {
                 newEntries.push([newName, entry[1]]);
             } else {
@@ -155,8 +155,8 @@ export class RegexBuilderService {
         }
         this.variables = new Map<string | "Regex", MainToken>(newEntries);
 
-        for (let token of this.variables.values()) {
-            for (let child of token.allChildren) {
+        for (const token of this.variables.values()) {
+            for (const child of token.allChildren) {
                 if (child instanceof VariableReferenceToken && child.name === oldName)
                     child.name = newName;
             }

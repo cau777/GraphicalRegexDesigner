@@ -8,8 +8,8 @@ export class BetweenTimesToken extends PrevCharModifierToken {
     }
 
     protected get token(): string {
-        let min = parseInt(this.values[0]);
-        let max = parseInt(this.values[1]);
+        const min = parseInt(this.values[0]);
+        const max = parseInt(this.values[1]);
 
         if (isNaN(min)) throw this.invalidMin();
         if (isNaN(max)) throw this.invalidMax();
@@ -22,8 +22,8 @@ export class BetweenTimesToken extends PrevCharModifierToken {
     }
 
     public tooltip() {
-        let min = parseInt(this.values[0]);
-        let max = parseInt(this.values[1]);
+        const min = parseInt(this.values[0]);
+        const max = parseInt(this.values[1]);
 
         if (isNaN(min) || isNaN(max))
             return "Matches if its content appears at least V1 times (inclusive) and at most V2 times (inclusive)";

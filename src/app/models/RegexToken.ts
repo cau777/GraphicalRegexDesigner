@@ -44,14 +44,14 @@ export abstract class RegexToken {
 
         while (index !== -1) {
             this.values.push("");
-            let text = this._name.substring(start, index)
+            const text = this._name.substring(start, index);
             this.header.push(...RegexToken.separateNewLines(text));
             this.header.push({type: "input", index: inputIndex++});
             start = index + 2;
             index = this._name.indexOf("{}", start);
         }
 
-        let rest = this._name.substring(start);
+        const rest = this._name.substring(start);
         if (rest) this.header.push(...RegexToken.separateNewLines(rest));
     }
 
@@ -93,8 +93,8 @@ export abstract class RegexToken {
     }
 
     private static separateNewLines(text: string): IHeaderPart[] {
-        let parts = text.split("\n");
-        let results: IHeaderPart[] = [];
+        const parts = text.split("\n");
+        const results: IHeaderPart[] = [];
 
         for (let i = 0; i < parts.length; i++) {
             results.push({type: "text", content: parts[i]});

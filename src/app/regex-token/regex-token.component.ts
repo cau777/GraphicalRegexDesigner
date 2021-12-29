@@ -29,10 +29,10 @@ export class RegexTokenComponent {
     public onMouseUp(e: Event) {
         e.stopPropagation();
         e.preventDefault();
-        let mouse = e as MouseEvent;
+        const mouse = e as MouseEvent;
 
         if (this.dragService.currentlyDragging) {
-            let pos = this.findInsertionPos(mouse.x, mouse.y);
+            const pos = this.findInsertionPos(mouse.x, mouse.y);
             this.token.children.splice(pos, 0, this.dragService.currentlyDragging);
             this.dragService.stopDragging();
             this.regexBuilder.generateRegex();
@@ -52,18 +52,18 @@ export class RegexTokenComponent {
     }
 
     private findInsertionPos(x: number, y: number) {
-        let childrenElement = (this.element.nativeElement as HTMLElement).querySelector(".children") as HTMLDivElement;
-        let children = childrenElement.children;
+        const childrenElement = (this.element.nativeElement as HTMLElement).querySelector(".children") as HTMLDivElement;
+        const children = childrenElement.children;
 
         if (children.length === 0) return 0;
 
-        let start = childrenElement.getBoundingClientRect().x;
+        const start = childrenElement.getBoundingClientRect().x;
         let indexRowOffset: number = -1;
 
-        let childrenWidths: number[] = [start];
+        const childrenWidths: number[] = [start];
 
         for (let i = 0; i < children.length; i++) {
-            let rect = children[i].getBoundingClientRect();
+            const rect = children[i].getBoundingClientRect();
             if (rect.top <= y && rect.bottom >= y) {
                 if (indexRowOffset === -1) indexRowOffset = i;
                 childrenWidths.push(rect.right);
@@ -71,7 +71,7 @@ export class RegexTokenComponent {
         }
 
         for (let i = 0; i < childrenWidths.length - 1; i++) {
-            let middle = (childrenWidths[i] + childrenWidths[i + 1]) / 2;
+            const middle = (childrenWidths[i] + childrenWidths[i + 1]) / 2;
 
             if (x < middle)
                 return indexRowOffset + i;

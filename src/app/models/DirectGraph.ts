@@ -35,7 +35,7 @@ class TarjanStrongConnectedComponents {
         this.ids[id] = this.currentId++;
         this.lowLength[id] = this.ids[id];
 
-        for (let adjacent of this.adjacency[id]) {
+        for (const adjacent of this.adjacency[id]) {
             if (this.ids[adjacent] === this.UnvisitedNodeId)
                 this.depthFirstSearch(adjacent);
 
@@ -46,7 +46,7 @@ class TarjanStrongConnectedComponents {
         // If we're at the start of a SCC
         if (this.ids[id] === this.lowLength[id]) {
             let removedNode: number;
-            let scc = [];
+            const scc = [];
 
             do {
                 removedNode = this.stack.pop()!;
@@ -89,22 +89,22 @@ export class DirectGraph<T> {
         this.addNode(node1);
         this.addNode(node2);
 
-        let index1 = this.nodes.indexOf(node1);
-        let index2 = this.nodes.indexOf(node2);
+        const index1 = this.nodes.indexOf(node1);
+        const index2 = this.nodes.indexOf(node2);
 
         this.adjacency[index1].push(index2);
     }
 
     public getCycles() {
-        let algorithm: TarjanStrongConnectedComponents = new TarjanStrongConnectedComponents(this);
+        const algorithm: TarjanStrongConnectedComponents = new TarjanStrongConnectedComponents(this);
         algorithm.apply();
         return algorithm.sccIndexes.map(o => o.map(p => this.nodes[p]))
     }
 
     public getOrderFor(node: T) {
-        let targetIndex = this.nodes.indexOf(node);
-        let result: T[] = [];
-        let isVisited: boolean[] = new Array(this.length).fill(false);
+        const targetIndex = this.nodes.indexOf(node);
+        const result: T[] = [];
+        const isVisited: boolean[] = new Array(this.length).fill(false);
         this.getOrderForRecursive(targetIndex, isVisited, result);
         return result;
     }
@@ -112,7 +112,7 @@ export class DirectGraph<T> {
     private getOrderForRecursive(index: number, isVisited: boolean[], result: T[]) {
         isVisited[index] = true;
 
-        for (let connected of this.adjacency[index]) {
+        for (const connected of this.adjacency[index]) {
             this.getOrderForRecursive(connected, isVisited, result);
         }
 

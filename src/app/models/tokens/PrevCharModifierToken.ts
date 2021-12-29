@@ -7,7 +7,7 @@ export abstract class PrevCharModifierToken extends RegexToken {
         if (this.children.length === 0)
             throw this.mustHaveChildren();
 
-        let content = this.compileAndConcatChildren();
+        const content = this.compileAndConcatChildren();
 
         if (content.length === 1) return content + this.token;
         if (content.startsWith("(") && content.endsWith(")")) return content; // If already in parentheses

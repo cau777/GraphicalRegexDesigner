@@ -20,13 +20,13 @@ export class TokenHeaderInputComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        let child = this.element.nativeElement.querySelector(".input") as HTMLSpanElement;
+        const child = this.element.nativeElement.querySelector(".input") as HTMLSpanElement;
         child.innerText = this.token.values[this.index];
         this.updateSpacesString(this.token.values[this.index]);
     }
 
     public onInput(e: Event) {
-        let text = (e.target as HTMLSpanElement).innerText;
+        const text = (e.target as HTMLSpanElement).innerText;
         this.token.values[this.index] = text;
         this.updateSpacesString(text);
         this.regexBuilder.generateRegex();
@@ -34,7 +34,7 @@ export class TokenHeaderInputComponent implements OnInit {
 
     private updateSpacesString(text: string) {
         let result = "";
-        for (let char of text) {
+        for (const char of text) {
             if (char === " ") result += "-";
             else result += " ";
         }

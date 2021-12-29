@@ -23,21 +23,22 @@ export class RegexTestingMatchesComponent implements OnChanges {
     }
 
     public findMatches(text: string) {
+        let match;
         if (!this.regex)
             return [];
 
-        let result: IMatchInfo[] = [];
+        const result: IMatchInfo[] = [];
         let matches: RegExpMatchArray[];
 
         if (this.regex.global) {
             matches = Array.from(text.matchAll(this.regex));
         } else {
-            let match = text.match(this.regex);
+            match = text.match(this.regex);
             matches = match ? [match] : [];
         }
 
-        for (let match of matches) {
-            let index = match.index ?? 0;
+        for (match of matches) {
+            const index = match.index ?? 0;
 
             result.push({
                 start: index,

@@ -17,17 +17,17 @@ export class RegexCompiler {
     }
 
     public compile(options: RegexOptions) {
-        let graph = this.createGraph();
-        let cycles = graph.getCycles();
-        let connectedVariables = cycles.filter(o => o.length > 1);
+        const graph = this.createGraph();
+        const cycles = graph.getCycles();
+        const connectedVariables = cycles.filter(o => o.length > 1);
 
         if (connectedVariables.length > 0) {
             this.result.generalErrors = connectedVariables.map(o => "Variables '" + o.join("', '") + "' form a circular dependency");
             return;
         }
 
-        let order = graph.getOrderFor("Regex");
-        for (let step of order) {
+        const order = graph.getOrderFor("Regex");
+        for (const step of order) {
             try {
                 this.compiledVariables.set(step, this.variables.get(step)!.compile());
             } catch (e) {
@@ -74,12 +74,12 @@ export class RegexCompiler {
     }
 
     private createGraph() {
-        let result = new DirectGraph<string>();
+        const result = new DirectGraph<string>();
         result.addNode("Regex");
 
-        for (let value of this.variables.values()) {
-            let variables = value.allChildren.filter(o => o instanceof VariableReferenceToken);
-            for (let variable of variables) {
+        for (const value of this.variables.values()) {
+            const variables = value.allChildren.filter(o => o instanceof VariableReferenceToken);
+            for (const variable of variables) {
                 result.addEdge(value.name, variable.name);
             }
         }
@@ -95,7 +95,7 @@ export class RegexCompiler {
     }
 
     public getCompiledVariable(name: string) {
-        let found = this.compiledVariables.get(name);
+        const found = this.compiledVariables.get(name);
         if (found === undefined) throw new RangeError(name + " was not compiled");
         return found;
     }

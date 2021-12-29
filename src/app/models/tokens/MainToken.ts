@@ -22,7 +22,7 @@ export class MainToken extends RegexToken {
     }
 
     public get allChildren() {
-        let result: RegexToken[] = [];
+        const result: RegexToken[] = [];
         this.allChildrenRecursive(this, result);
         return result;
     }
@@ -30,7 +30,7 @@ export class MainToken extends RegexToken {
     private allChildrenRecursive(current: RegexToken, list: RegexToken[]) {
         list.push(...current.children)
 
-        for (let child of current.children) {
+        for (const child of current.children) {
             this.allChildrenRecursive(child, list);
         }
     }

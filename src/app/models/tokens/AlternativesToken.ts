@@ -5,11 +5,11 @@ export abstract class AlternativesToken extends RegexToken {
     private static readonly uniqueInSetIgnored = new Set(["\\"]);
 
     protected compileAndConcatUnique() {
-        let all = this.compileAndConcatChildren();
-        let alreadyUsed = new Set();
+        const all = this.compileAndConcatChildren();
+        const alreadyUsed = new Set();
         let result = "";
 
-        for (let char of all) {
+        for (const char of all) {
             if (alreadyUsed.has(char)) continue;
             if (!AlternativesToken.uniqueInSetIgnored.has(char))
                 alreadyUsed.add(char);
@@ -20,20 +20,20 @@ export abstract class AlternativesToken extends RegexToken {
     }
 
     protected simplify(s: string) {
-        let replaced = s.replace(AllChars, "\\w").replace(Digits, "\\d");
-        let replacedLen = replaced.length;
+        const replaced = s.replace(AllChars, "\\w").replace(Digits, "\\d");
+        const replacedLen = replaced.length;
         let result = "";
 
         let i = 0;
         while (i < replacedLen) {
-            let start = replaced.charAt(i);
+            const start = replaced.charAt(i);
             let end = start;
 
-            let startCode = replaced.charCodeAt(i);
+            const startCode = replaced.charCodeAt(i);
             let sequenceLen = 0;
 
             while (sequenceLen + i < replacedLen) {
-                let pos = sequenceLen + i;
+                const pos = sequenceLen + i;
                 if (replaced.charCodeAt(pos) - sequenceLen !== startCode) break;
                 end = replaced.charAt(pos);
                 sequenceLen++;

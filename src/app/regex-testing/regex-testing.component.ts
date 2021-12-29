@@ -21,12 +21,12 @@ export class RegexTestingComponent {
     }
 
     public onTextInput(e: Event) {
-        let textarea = e.target as HTMLTextAreaElement;
+        const textarea = e.target as HTMLTextAreaElement;
         this.text = textarea.value;
         this.textRows = Math.max(2, 2 + (this.text.match(/\n/g) || []).length);
 
         let spaces = "";
-        for (let char of this.text) {
+        for (const char of this.text) {
             if (char === " ") spaces += "-";
             else if (char === "\n") spaces += "↩\n";
             else spaces += " ";

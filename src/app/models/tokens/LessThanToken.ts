@@ -8,7 +8,7 @@ export class LessThanToken extends PrevCharModifierToken {
     }
 
     protected get token() {
-        let max = parseInt(this.values[0]);
+        const max = parseInt(this.values[0]);
         if (isNaN(max)) throw this.invalidMax();
         return "{," + max + "}";
     }
@@ -18,7 +18,7 @@ export class LessThanToken extends PrevCharModifierToken {
     }
 
     public tooltip() {
-        let max = parseInt(this.values[0]);
+        const max = parseInt(this.values[0]);
         if (isNaN(max))
             return "Matches if its content appears less than V times (inclusive)";
 

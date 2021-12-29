@@ -8,7 +8,7 @@ export class MoreThanToken extends PrevCharModifierToken {
     }
 
     protected get token() {
-        let min = parseInt(this.values[0]);
+        const min = parseInt(this.values[0]);
         if (isNaN(min)) throw this.invalidMin();
         return "{" + min + ",}";
     }
@@ -18,7 +18,7 @@ export class MoreThanToken extends PrevCharModifierToken {
     }
 
     public tooltip() {
-        let min = parseInt(this.values[0]);
+        const min = parseInt(this.values[0]);
         if (isNaN(min))
             return "Matches if its content appears more than V times (inclusive)";
 

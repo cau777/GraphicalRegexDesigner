@@ -56,13 +56,13 @@ export class AvailableTokensComponent implements OnChanges {
     public getTokens() {
         let tokens = [...this.defaultTokens];
 
-        for (let variable of this.regexBuilder.variables.values()) {
+        for (const variable of this.regexBuilder.variables.values()) {
             if (variable.name !== "Regex")
                 tokens.push(new VariableReferenceToken(variable.name, this.regexBuilder));
         }
 
         if (this.query) {
-            let lowerQuery = this.query.toLowerCase();
+            const lowerQuery = this.query.toLowerCase();
             tokens = tokens.filter(o => o.name.toLowerCase().indexOf(lowerQuery) !== -1);
         }
 
@@ -70,7 +70,7 @@ export class AvailableTokensComponent implements OnChanges {
     }
 
     public onInputQuery(e: Event) {
-        let element = e.target as HTMLInputElement;
+        const element = e.target as HTMLInputElement;
         this.query = element.value;
     }
 
