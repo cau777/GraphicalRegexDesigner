@@ -3,14 +3,15 @@ import {VariableReferenceToken} from "./models/tokens/VariableReferenceToken";
 import {MainToken} from "./models/tokens/MainToken";
 import {RegexOptions} from "./models/RegexOptions";
 import {RegexCompilationResult} from "./models/RegexCompilationResult";
+import {IReadOnlyMap} from "./models/interfaces/IReadOnlyMap";
 
 export class RegexCompiler {
     public compiledVariables: Map<string, string>;
     public result: RegexCompilationResult;
 
-    private readonly variables: Map<string, MainToken>;
+    private readonly variables: IReadOnlyMap<string, MainToken>;
 
-    public constructor(variables: Map<string, MainToken>) {
+    public constructor(variables: IReadOnlyMap<string, MainToken>) {
         this.result = new RegexCompilationResult();
         this.compiledVariables = new Map<string, string>();
         this.variables = variables;

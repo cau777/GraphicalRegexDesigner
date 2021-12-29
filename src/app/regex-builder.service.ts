@@ -6,19 +6,19 @@ import {VariableReferenceToken} from "./models/tokens/VariableReferenceToken";
 import {RegexOptions} from "./models/RegexOptions";
 import {RegexCompiler} from "./regex-compiler";
 import {RegexCompilationResult} from "./models/RegexCompilationResult";
+import {IReadOnlyMap} from "./models/interfaces/IReadOnlyMap";
 
 @Injectable({
     providedIn: 'root'
 })
 export class RegexBuilderService {
-    public variables: Map<string | "Regex", MainToken>;
+    public variables!: IReadOnlyMap<string, MainToken>;
     public result: RegexCompilationResult;
     public compiler: RegexCompiler;
 
     private readonly options: RegexOptions;
 
     public constructor() {
-        this.variables = new Map<string, MainToken>();
         this.defaultVariablesSetup();
         this.options = new RegexOptions();
         this.result = new RegexCompilationResult();
@@ -59,7 +59,7 @@ export class RegexBuilderService {
         this.generateRegex();
     }
 
-    public set onlyFirst(value: boolean){
+    public set onlyFirst(value: boolean) {
         this.options.onlyFirst = value;
         this.generateRegex();
     }
@@ -78,12 +78,13 @@ export class RegexBuilderService {
             children.push(token)
         }
 
-        this.variables.set(name, new MainToken(name, true, this, children));
+        return new MainToken(name, true, this, children);
     }
 
     public newVariable() {
         const name = this.getNewVariableName();
-        this.variables.set(name, new MainToken(name, false, this));
+        const newEntry: [string, MainToken] = [name, new MainToken(name, false, this)];
+        this.variables = new Map<string, MainToken>([...Array.from(this.variables.entries()), newEntry]);
         this.generateRegex();
     }
 
@@ -97,22 +98,25 @@ export class RegexBuilderService {
     }
 
     public clear() {
-        this.variables.clear();
         this.defaultVariablesSetup();
         this.generateRegex();
     }
 
     public defaultVariablesSetup() {
-        this.variables.set("Regex", new MainToken("Regex", true, this));
-        this.createLiteralsVariable("Upper letters", Upper);
-        this.createLiteralsVariable("Lower letters", Lower);
-        this.createLiteralsVariable("Letters", AllChars);
-        this.createLiteralsVariable("Digits", Digits);
+        this.variables = new Map<string, MainToken>([
+            ["Regex", new MainToken("Regex", true, this)],
+            ["Upper letters", this.createLiteralsVariable("Upper letters", Upper)],
+            ["Lower letters", this.createLiteralsVariable("Lower letters", Lower)],
+            ["Letters", this.createLiteralsVariable("Letters", AllChars)],
+            ["Digits", this.createLiteralsVariable("Digits", Digits)],
+        ]);
     }
 
     public removeVariable(name: string) {
-        const deleted = this.variables.delete(name);
+        const deleted = this.variables.get(name);
         if (!deleted) throw new Error("Invalid name: " + name);
+
+        this.variables = new Map<string, MainToken>(Array.from(this.variables.entries()).filter(o => o[1] !== deleted));
 
         for (const variable of this.variables.values()) {
             const children = variable.children;

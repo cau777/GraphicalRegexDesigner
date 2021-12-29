@@ -1,4 +1,4 @@
-import {Component, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {DragService} from "../drag.service";
 import {AnySymbolToken} from "../models/tokens/AnySymbolToken";
 import {LiteralToken} from "../models/tokens/LiteralToken";
@@ -19,6 +19,8 @@ import {VariableReferenceToken} from "../models/tokens/VariableReferenceToken";
 import {TermsAlternativesToken} from "../models/tokens/TermsAlternativesToken";
 import {NegativeSymbolAlternativesToken} from "../models/tokens/NegativeSymbolAlternativesToken";
 import {RegexFragmentToken} from "../models/tokens/RegexFragmentToken";
+import {MainToken} from "../models/tokens/MainToken";
+import {IReadOnlyMap} from "../models/interfaces/IReadOnlyMap";
 
 @Component({
     selector: 'app-available-tokens',
@@ -26,6 +28,9 @@ import {RegexFragmentToken} from "../models/tokens/RegexFragmentToken";
     styleUrls: ['./available-tokens.component.less']
 })
 export class AvailableTokensComponent implements OnChanges {
+    @Input()
+    public variables!: IReadOnlyMap<string, MainToken>;
+
     public tokens: RegexToken[];
     private readonly defaultTokens: RegexToken[];
     private query = "";
@@ -54,6 +59,7 @@ export class AvailableTokensComponent implements OnChanges {
     }
 
     public getTokens() {
+        console.log("getTokens")
         let tokens = [...this.defaultTokens];
 
         for (const variable of this.regexBuilder.variables.values()) {
@@ -72,9 +78,10 @@ export class AvailableTokensComponent implements OnChanges {
     public onInputQuery(e: Event) {
         const element = e.target as HTMLInputElement;
         this.query = element.value;
+        this.tokens = this.getTokens();
     }
 
-    public ngOnChanges() {
+    public ngOnChanges(changes: SimpleChanges) {
         this.tokens = this.getTokens();
     }
 }

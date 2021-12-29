@@ -22,7 +22,7 @@
     <hr/>
 
     <app-regex-token-disposal>
-        <app-available-tokens></app-available-tokens>
+        <app-available-tokens [variables]="regexBuilder.variables"></app-available-tokens>
     </app-regex-token-disposal>
 
     <app-dragging-element *ngIf="dragService.currentlyDragging" [nestCount]="2">
