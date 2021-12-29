@@ -10,8 +10,4 @@ import {RegexBuilderService} from "../regex-builder.service";
 export class RegexBuilderComponent {
     public constructor(public dragService: DragService, public regexBuilder: RegexBuilderService) {
     }
-
-    // public getVars() {
-    //     return Array.from(this.regexBuilder.variables.values());
-    // }
 }

@@ -5,11 +5,9 @@
                 Match {{index}}: {{match.start}}-{{match.end}} "{{match.groups[0]}}"
             </mat-expansion-panel-header>
 
-            <p>
-                <span *ngFor="let group of match.groups; let index = index">
-                    Group {{index}} = "{{group}}"
-                </span>
-            </p>
+            <div *ngFor="let group of match.groups; let index = index">
+                Group {{index}} = "{{group}}"
+            </div>
         </mat-expansion-panel>
     </div>
 </mat-accordion>

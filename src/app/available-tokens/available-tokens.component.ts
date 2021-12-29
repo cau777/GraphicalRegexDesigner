@@ -59,7 +59,6 @@ export class AvailableTokensComponent implements OnChanges {
     }
 
     public getTokens() {
-        console.log("getTokens")
         let tokens = [...this.defaultTokens];
 
         for (const variable of this.regexBuilder.variables.values()) {
