@@ -1,11 +1,29 @@
 <app-card [title]="'Options'">
-    <mat-checkbox (change)="regexBuilderService.assertStart = $event.checked">Match starts at the first character of the string</mat-checkbox>
+    <mat-checkbox [checked]="regexBuilderService.options.assertStart" (change)="regexBuilderService.assertStart = $event.checked">
+        Match starts at the first character of the string
+    </mat-checkbox>
+
     <br/>
-    <mat-checkbox (change)="regexBuilderService.assertEnd = $event.checked">Match ends at the last character of the string</mat-checkbox>
+
+    <mat-checkbox [checked]="regexBuilderService.options.assertEnd" (change)="regexBuilderService.assertEnd = $event.checked">
+        Match ends at the last character of the string
+    </mat-checkbox>
+
     <br/>
-    <mat-checkbox (change)="regexBuilderService.escapeBackslash = $event.checked">Escape backslashes (\)</mat-checkbox>
+
+    <mat-checkbox [checked]="regexBuilderService.options.escapeBackslashes" (change)="regexBuilderService.escapeBackslash = $event.checked">
+        Escape backslashes (\)
+    </mat-checkbox>
+
     <br/>
-    <mat-checkbox (change)="regexBuilderService.onlyFirst = $event.checked">Stop after first match</mat-checkbox>
+
+    <mat-checkbox [checked]="regexBuilderService.options.onlyFirst" (change)="regexBuilderService.onlyFirst = $event.checked">
+        Stop after first match
+    </mat-checkbox>
+
     <br/>
-    <mat-checkbox (change)="regexBuilderService.caseInsensitive = $event.checked">Case insensitive</mat-checkbox>
+
+    <mat-checkbox [checked]="regexBuilderService.options.caseInsensitive" (change)="regexBuilderService.caseInsensitive = $event.checked">
+        Case insensitive
+    </mat-checkbox>
 </app-card>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {LocalStorageService} from "../../local-storage.service";
 import {IExpressionSaveData} from "../../models/SaveData";
 
@@ -11,7 +11,7 @@ export class SaveNameDialogComponent {
     public value = "";
     public showing: IExpressionSaveData[];
 
-    public constructor(private storageService: LocalStorageService) {
+    public constructor(private storageService: LocalStorageService, private element: ElementRef) {
         this.showing = storageService.expressions;
     }
 
@@ -27,5 +27,7 @@ export class SaveNameDialogComponent {
 
     public onChangeSelected(data: IExpressionSaveData) {
         this.value = data.name;
+        const inputElement = (this.element.nativeElement as HTMLElement).querySelector("input") as HTMLInputElement;
+        inputElement.value = this.value;
     }
 }
