@@ -11,6 +11,8 @@ import {MatInputModule} from "@angular/material/input";
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
 import { SimpleInfoComponent } from './simple-info/simple-info.component';
+import { SavedDisplayComponent } from './saved-display/saved-display.component';
+import { SaveNameDialogComponent } from './save-name-dialog/save-name-dialog.component';
 
 // Basic and generic components
 @NgModule({
@@ -22,6 +24,8 @@ import { SimpleInfoComponent } from './simple-info/simple-info.component';
         ConfirmDialogComponent,
         ErrorDialogComponent,
         SimpleInfoComponent,
+        SavedDisplayComponent,
+        SaveNameDialogComponent,
     ],
     imports: [
         CommonModule,

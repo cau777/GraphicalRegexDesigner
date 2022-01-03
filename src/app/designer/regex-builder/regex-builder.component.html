@@ -3,6 +3,10 @@
 
     <!--suppress HtmlUnknownBooleanAttribute -->
     <div class="ms-auto" cardHeader>
+        <button mat-icon-button matTooltip="Save" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+
         <button mat-icon-button matTooltip="Add variable" (click)="regexBuilder.newVariable()">
             <mat-icon>add_circle_outline</mat-icon>
         </button>

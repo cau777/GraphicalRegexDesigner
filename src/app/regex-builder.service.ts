@@ -15,8 +15,7 @@ export class RegexBuilderService {
     public variables!: IReadOnlyMap<string, MainToken>;
     public result: RegexCompilationResult;
     public compiler: RegexCompiler;
-
-    private readonly options: RegexOptions;
+    public options: RegexOptions;
 
     public constructor() {
         this.defaultVariablesSetup();

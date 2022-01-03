@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+    Save
+    <br/>
+    <input class="simple-input" (input)="onInput($event)"/>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="undefined">Close</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="value">Save</button>
+</div>
