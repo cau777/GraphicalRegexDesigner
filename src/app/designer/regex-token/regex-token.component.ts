@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
-import {RegexToken} from "../models/RegexToken";
-import {DragService} from "../drag.service";
-import {RegexBuilderService} from "../regex-builder.service";
+import {RegexToken} from "../../models/RegexToken";
+import {DragService} from "../../drag.service";
+import {RegexBuilderService} from "../../regex-builder.service";
 import {MouseEvent} from "ngx-bootstrap/utils/facade/browser";
 
 @Component({

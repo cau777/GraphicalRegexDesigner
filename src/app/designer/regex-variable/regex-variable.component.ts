@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {RegexBuilderService} from "../regex-builder.service";
-import {RegexToken} from "../models/RegexToken";
+import {RegexBuilderService} from "../../regex-builder.service";
+import {RegexToken} from "../../models/RegexToken";
 import {MatDialog} from "@angular/material/dialog";
-import {InputDialogComponent} from "../basic/input-dialog/input-dialog.component";
-import {IInputDialogData} from "../basic/input-dialog/IInputDialogData";
-import {ConfirmDialogComponent} from "../basic/confirm-dialog/confirm-dialog.component";
-import {ErrorDialogComponent} from "../basic/error-dialog/error-dialog.component";
+import {InputDialogComponent} from "../../basic/input-dialog/input-dialog.component";
+import {IInputDialogData} from "../../basic/input-dialog/IInputDialogData";
+import {ConfirmDialogComponent} from "../../basic/confirm-dialog/confirm-dialog.component";
+import {ErrorDialogComponent} from "../../basic/error-dialog/error-dialog.component";
 
 @Component({
     selector: 'app-regex-variable',

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {RegexToken} from "../models/RegexToken";
+import {RegexToken} from "../../models/RegexToken";
 
 @Component({
     selector: 'app-regex-token-graphics',

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RegexBuilderService} from "../regex-builder.service";
+import {RegexBuilderService} from "../../regex-builder.service";
 
 export interface IMatchInfo {
     start: number;

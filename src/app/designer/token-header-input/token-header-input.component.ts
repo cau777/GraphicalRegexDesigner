@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {RegexToken} from "../models/RegexToken";
-import {RegexBuilderService} from "../regex-builder.service";
+import {RegexToken} from "../../models/RegexToken";
+import {RegexBuilderService} from "../../regex-builder.service";
 
 @Component({
     selector: 'app-token-header-input',

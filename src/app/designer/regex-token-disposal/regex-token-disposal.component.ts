@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DragService} from "../drag.service";
+import {DragService} from "../../drag.service";
 
 @Component({
     selector: 'app-regex-token-disposal',

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {DragService} from "../drag.service";
-import {RegexBuilderService} from "../regex-builder.service";
+import {DragService} from "../../drag.service";
+import {RegexBuilderService} from "../../regex-builder.service";
 
 @Component({
     selector: 'app-regex-builder',

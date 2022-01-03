@@ -1,7 +1,11 @@
 <header class="light-5 p-2">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            Graphical Regex Designer
+            <div class="d-flex flex-row align-items-center">
+                <span class="fs-6">Graphical Regex Designer</span>
+                <a mat-button routerLink="/" routerLinkActive="" #rla1="routerLinkActive" [disabled]="rla1.isActive" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                <a mat-button routerLink="/create" routerLinkActive="" #rla2="routerLinkActive" [disabled]="rla2.isActive" [routerLinkActiveOptions]="{exact: true}">Create</a>
+            </div>
             <div class="ms-auto">
                 <a href="https://www.github.com/cau777/GraphicalRegexDesigner" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-github"

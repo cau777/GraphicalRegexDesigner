@@ -1,6 +1,6 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {RegexToken} from "../models/RegexToken";
-import {IHeaderPart} from "../models/IHeaderPart";
+import {RegexToken} from "../../models/RegexToken";
+import {IHeaderPart} from "../../models/IHeaderPart";
 
 @Component({
     selector: 'app-regex-token-header',
