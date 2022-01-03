@@ -2,11 +2,11 @@ import {Component} from '@angular/core';
 import {LocalStorageService} from "../../local-storage.service";
 
 @Component({
-    selector: 'app-designer-main',
-    templateUrl: './designer-main.component.html',
-    styleUrls: ['./designer-main.component.less']
+    selector: 'app-welcome',
+    templateUrl: './welcome.component.html',
+    styleUrls: ['./welcome.component.less']
 })
-export class DesignerMainComponent {
+export class WelcomeComponent {
     public constructor(public storageService: LocalStorageService) {
     }
 }
