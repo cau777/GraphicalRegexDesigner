@@ -13,6 +13,7 @@ import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
 import { SimpleInfoComponent } from './simple-info/simple-info.component';
 import { SavedDisplayComponent } from './saved-display/saved-display.component';
 import { SaveNameDialogComponent } from './save-name-dialog/save-name-dialog.component';
+import {MatTableModule} from "@angular/material/table";
 
 // Basic and generic components
 @NgModule({
@@ -32,7 +33,8 @@ import { SaveNameDialogComponent } from './save-name-dialog/save-name-dialog.com
         MatButtonModule,
         MatDialogModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatTableModule
     ],
     exports: [
         CardComponent,
@@ -40,7 +42,8 @@ import { SaveNameDialogComponent } from './save-name-dialog/save-name-dialog.com
         SimpleErrorComponent,
         InputDialogComponent,
         ConfirmDialogComponent,
-        SimpleInfoComponent
+        SimpleInfoComponent,
+        SavedDisplayComponent,
     ]
 })
 export class BasicModule {}

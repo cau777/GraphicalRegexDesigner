@@ -2,8 +2,12 @@
     Save
     <br/>
     <input class="simple-input" (input)="onInput($event)"/>
+
+    <hr/>
+
+    <app-saved-display [saved]="showing" (changeSelected)="onChangeSelected($event)"></app-saved-display>
 </div>
 <div mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close]="undefined">Close</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="value">Save</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="value.trim()">Save</button>
 </div>

@@ -41,6 +41,9 @@ import {MatExpansionModule} from "@angular/material/expansion";
         RegexTokenHeaderComponent,
         RegexTestingMatchesComponent,
     ],
+    exports: [
+        RegexTokenDisposalComponent
+    ],
     imports: [
         CommonModule,
         DesignerRoutingModule,

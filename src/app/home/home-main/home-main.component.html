@@ -4,7 +4,11 @@
         <mat-icon>add</mat-icon>Create new expression
     </button>
 
-    <button mat-raised-button color="accent">
+    <button mat-raised-button color="accent" (click)="load()" *ngIf="storageService.expressions.length">
         <mat-icon>storage</mat-icon>Load existing expression
     </button>
+</div>
+
+<div class="mt-5" *ngIf="storageService.expressions.length">
+    <app-saved-display [saved]="storageService.expressions" (changeSelected)="selected = $event"></app-saved-display>
 </div>

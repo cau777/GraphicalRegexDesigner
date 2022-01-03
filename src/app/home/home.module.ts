@@ -6,6 +6,7 @@ import {HomeMainComponent} from './home-main/home-main.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {BasicModule} from "../basic/basic.module";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatIconModule} from "@angular/material/icon";
         CommonModule,
         HomeRoutingModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        BasicModule
     ]
 })
 export class HomeModule {}
