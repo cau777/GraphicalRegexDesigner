@@ -3,9 +3,10 @@
     <br/>
     <input class="simple-input" (input)="onInput($event)"/>
 
-    <hr/>
-
-    <app-saved-display [saved]="showing" (changeSelected)="onChangeSelected($event)"></app-saved-display>
+    <ng-container *ngIf="showing.length">
+        <hr/>
+        <app-saved-display [saved]="showing" (changeSelected)="onChangeSelected($event)"></app-saved-display>
+    </ng-container>
 </div>
 <div mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close]="undefined">Close</button>
