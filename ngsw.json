@@ -1,0 +1,81 @@
+{
+  "configVersion": 1,
+  "timestamp": 1641830004609,
+  "index": "/GraphicalRegexDesigner/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/GraphicalRegexDesigner/210.57d7d581197ae0c8.js",
+        "/GraphicalRegexDesigner/458.d4b6fe383aeed9f6.js",
+        "/GraphicalRegexDesigner/542.51d7fb346377e2bd.js",
+        "/GraphicalRegexDesigner/favicon.ico",
+        "/GraphicalRegexDesigner/index.html",
+        "/GraphicalRegexDesigner/main.643afeea55e11295.js",
+        "/GraphicalRegexDesigner/manifest.webmanifest",
+        "/GraphicalRegexDesigner/polyfills.c1ee4567e0d0dfe8.js",
+        "/GraphicalRegexDesigner/runtime.c8b9bb40f20f43a7.js",
+        "/GraphicalRegexDesigner/styles.d8d3a308fd67d6f4.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/GraphicalRegexDesigner/assets/icons/maskable_icon_x128.png",
+        "/GraphicalRegexDesigner/assets/icons/maskable_icon_x192.png",
+        "/GraphicalRegexDesigner/assets/icons/maskable_icon_x384.png",
+        "/GraphicalRegexDesigner/assets/icons/maskable_icon_x512.png",
+        "/GraphicalRegexDesigner/assets/icons/maskable_icon_x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/GraphicalRegexDesigner/210.57d7d581197ae0c8.js": "e513c78d91d316001eebdcfbe1fd267626ffe28b",
+    "/GraphicalRegexDesigner/458.d4b6fe383aeed9f6.js": "e22b4a0935abaa1118adc839361242a7fb4aa1fb",
+    "/GraphicalRegexDesigner/542.51d7fb346377e2bd.js": "2337a699918b090adb3cbbffed45b6a311b7f07b",
+    "/GraphicalRegexDesigner/assets/icons/maskable_icon_x128.png": "f041d0e0411a3175790d2fcee6ee86c1d9cb9ad5",
+    "/GraphicalRegexDesigner/assets/icons/maskable_icon_x192.png": "6b4f520de3f91fb2efa6eb7abeddc2062fc425c8",
+    "/GraphicalRegexDesigner/assets/icons/maskable_icon_x384.png": "63b34c709715c09d5dabb5b6a8ada5ef5ae64b7e",
+    "/GraphicalRegexDesigner/assets/icons/maskable_icon_x512.png": "69cc991fbe287d0913ed2e47d2e403e52c703cb9",
+    "/GraphicalRegexDesigner/assets/icons/maskable_icon_x96.png": "269ebf1a56add439826d1588d83be4fdd566c7d9",
+    "/GraphicalRegexDesigner/favicon.ico": "7f90fb97fba2861df78173a194f9e94ab7ae45b8",
+    "/GraphicalRegexDesigner/index.html": "c7efe9153d8a63c6439c5a6a8e5a90fb95d11c2d",
+    "/GraphicalRegexDesigner/main.643afeea55e11295.js": "b7940d33e32eacd2d2e2824acb6771a76e2de508",
+    "/GraphicalRegexDesigner/manifest.webmanifest": "8a96fcf78775b1ecf427859569ca2a2ad4269f22",
+    "/GraphicalRegexDesigner/polyfills.c1ee4567e0d0dfe8.js": "e8fd1ca126c5f944bc6e4911e5fdd79ea1594329",
+    "/GraphicalRegexDesigner/runtime.c8b9bb40f20f43a7.js": "9bc0a7e9d47bc1c9703b99f316f33c68946076ce",
+    "/GraphicalRegexDesigner/styles.d8d3a308fd67d6f4.css": "1abdcc192d10149ddf0cac57de82e3f927a601f6"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
