@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1646786878390,
+  "timestamp": 1647292510268,
   "index": "/GraphicalRegexDesigner/index.html",
   "assetGroups": [
     {
@@ -52,7 +52,7 @@
     "/GraphicalRegexDesigner/assets/icons/maskable_icon_x512.png": "69cc991fbe287d0913ed2e47d2e403e52c703cb9",
     "/GraphicalRegexDesigner/assets/icons/maskable_icon_x96.png": "269ebf1a56add439826d1588d83be4fdd566c7d9",
     "/GraphicalRegexDesigner/favicon.ico": "7f90fb97fba2861df78173a194f9e94ab7ae45b8",
-    "/GraphicalRegexDesigner/index.html": "1e31dd190a354642a987bef192bfb590999a71ad",
+    "/GraphicalRegexDesigner/index.html": "95c76f996488772379073198bd6dc6d8f54603db",
     "/GraphicalRegexDesigner/main.7498ee65688c17de.js": "02d40a5b288b4b4512e2c46629276c47b30f355d",
     "/GraphicalRegexDesigner/manifest.webmanifest": "8a96fcf78775b1ecf427859569ca2a2ad4269f22",
     "/GraphicalRegexDesigner/polyfills.c1ee4567e0d0dfe8.js": "e8fd1ca126c5f944bc6e4911e5fdd79ea1594329",
