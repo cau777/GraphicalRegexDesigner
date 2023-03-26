@@ -1,4 +1,4 @@
-name: Gihub Pages Deploy
+name: Docker Deploy
 
 on:
     push:
@@ -10,19 +10,15 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                node-version: [14.17]
-
         steps:
             - name: Checkout
               uses: actions/checkout@v1
 
-            - name: Install and build
-              run: npm install && npm run gh-build
+            - name: Docker login
+              run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-            - name: Deploy
-              uses: JamesIves/github-pages-deploy-action@4.1.1
-              with:
-                  branch: gh-pages
-                  folder: dist/graphical-regex-designer
+            - name: Docker build
+              run: docker build -t cau777/regex-designer-server .
+
+            - name: Docker push
+              run: docker push cau777/regex-designer-server:latest
